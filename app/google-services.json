@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "976869671689",
+    "firebase_url": "https://furnitureapp-a03d7-default-rtdb.firebaseio.com",
+    "project_id": "furnitureapp-a03d7",
+    "storage_bucket": "furnitureapp-a03d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976869671689:android:607fffc98a7b2e6a4949d8",
+        "android_client_info": {
+          "package_name": "com.example.furniture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976869671689-lc3bcllt0f43t2vadgvj6smue9lv5103.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.furniture",
+            "certificate_hash": "f283e6a68bb3dda44f3a193ff9f59532f271bf3f"
+          }
+        },
+        {
+          "client_id": "976869671689-te2dn2vksqnbhrn5km4g4v2fabcgtck1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo5tP3jlJljnnYa_HTdy8vCrhTVBIg6R4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976869671689-te2dn2vksqnbhrn5km4g4v2fabcgtck1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

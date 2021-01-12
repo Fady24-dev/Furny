@@ -1,0 +1,214 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Base stack',
+        },
+      ],
+      path: 'sampledata/chair1.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'LEG',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Fabric',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: 'Fabric KR',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Pillow_Fabric',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: 'Pillow_02',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Throw_Fabric',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: 'Throw_Fabric',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/chair1.fbx',
+    name: 'chair1',
+    recenter: 'root',
+    scale: 0.011427,
+  },
+  samplers: [
+    {
+      file: 'sampledata\\chair1.fbm\\Throw_Fabric.jpg',
+      name: 'Throw_Fabric',
+      pipeline_name: 'chair1.fbm\\Throw_Fabric.jpg',
+    },
+    {
+      file: 'sampledata\\chair1.fbm\\Pillow_02.jpg',
+      name: 'Pillow_02',
+      pipeline_name: 'chair1.fbm\\Pillow_02.jpg',
+    },
+    {
+      file: 'sampledata\\chair1.fbm\\WoodBlack.jpg',
+      name: 'WoodBlack',
+      params: {
+        usage_type: 'Data',
+      },
+      pipeline_name: 'chair1.fbm\\WoodBlack.jpg',
+    },
+    {
+      file: 'sampledata\\chair1.fbm\\Fabric KR.jpg',
+      name: 'Fabric KR',
+      pipeline_name: 'chair1.fbm\\Fabric KR.jpg',
+    },
+    {
+      file: 'sampledata\\chair1.fbm\\FABRIC B.jpg',
+      name: 'FABRIC B',
+      params: {
+        usage_type: 'Data',
+      },
+      pipeline_name: 'chair1.fbm\\FABRIC B.JPG',
+    },
+  ],
+  version: '0.54:2',
+}
