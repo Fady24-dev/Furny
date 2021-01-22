@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()){
                         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        loadingbar.dismiss();
                         finish();
                         // Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                     }
