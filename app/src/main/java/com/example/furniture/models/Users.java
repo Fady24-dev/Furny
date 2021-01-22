@@ -3,9 +3,6 @@ package com.example.furniture.models;
 public class Users {
     private String name,email;
 
-    //Fady was here
-    //fady2
-
     public Users(String name, String email) {
         this.name = name;
         this.email = email;

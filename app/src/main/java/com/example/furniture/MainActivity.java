@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
 
-//Sala7
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
