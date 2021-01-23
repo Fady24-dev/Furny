@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
 
-
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(Ref,Products.class)
