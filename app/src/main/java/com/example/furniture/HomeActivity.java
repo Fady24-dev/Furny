@@ -67,8 +67,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
                 Toast.makeText(HomeActivity.this, "Signed out", Toast.LENGTH_SHORT).show();
-
             }
+
         });
 
 
@@ -98,4 +98,5 @@ public class HomeActivity extends AppCompatActivity {
         super.onStop();
         hotProductAdapter.stopListening();
     }
+
 }

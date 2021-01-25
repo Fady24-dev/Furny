@@ -1,6 +1,7 @@
 package com.example.furniture.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.furniture.PurchaseActivity;
 import com.example.furniture.R;
+import com.example.furniture.interfaces.ItemClickListner;
 import com.example.furniture.models.Products;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -36,9 +39,16 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
     @Override
     protected void onBindViewHolder(@NonNull HotProductAdapter.productsViewholder holder, int position, @NonNull Products model) {
         holder.pName.setText(model.getName());
-        holder.pPrice.setText(model.getPrice()+"$");
+        holder.pPrice.setText("$"+model.getPrice());
         Picasso.with(context).load(model.getImage()).into(holder.pImage);
-
+        holder.v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(v.getContext(),PurchaseActivity.class);
+                intent.putExtra("pid",getRef(position).getKey());
+                v.getContext().startActivity(intent);
+            }
+        });
 
     }
 
@@ -53,14 +63,20 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
         return new HotProductAdapter.productsViewholder(view);
     }
 
-    public class productsViewholder extends RecyclerView.ViewHolder {
-        TextView pName,pPrice;
+    public static class productsViewholder extends RecyclerView.ViewHolder{
+        TextView pName, pPrice;
         ImageView pImage;
+        View v;
+        public ItemClickListner listner;
+
         public productsViewholder(@NonNull View itemView) {
             super(itemView);
-
-            pName=itemView.findViewById(R.id.hot_items_prodName);
-            pPrice=itemView.findViewById(R.id.hot_items_prodPrice);
-            pImage=itemView.findViewById(R.id.hot_items_prodImage);        }
+            pName = itemView.findViewById(R.id.hot_items_prodName);
+            pPrice = itemView.findViewById(R.id.hot_items_prodPrice);
+            pImage = itemView.findViewById(R.id.hot_items_prodImage);
+            v=itemView;
+        }
     }
+
+
 }
