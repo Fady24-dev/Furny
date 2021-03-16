@@ -1,12 +1,13 @@
 package com.example.furniture.models;
 
 public class Users {
-    private String name,email;
+    private String name,email,image;
 
     public Users(String name, String email) {
         this.name = name;
         this.email = email;
     }
+
 
     public Users() {
     }

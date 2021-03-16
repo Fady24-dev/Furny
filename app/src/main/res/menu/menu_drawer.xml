@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/home_drawer"
@@ -18,9 +17,7 @@
             android:title="My Account"
             app:showAsAction="always"/>
 
-    </group>
 
-    <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/wish_list_drawer"
@@ -40,9 +37,7 @@
             android:title="Cart"
             app:showAsAction="always"/>
 
-    </group>
 
-    <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/share_drawer"
@@ -62,7 +57,5 @@
             android:title="Log Out"
             app:showAsAction="always"/>
 
-
-    </group>
 
 </menu>

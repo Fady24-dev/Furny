@@ -11,18 +11,19 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="89dp"
         android:background="@color/colorPrimaryDark"
         android:paddingTop="24dp"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp" >
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:theme="@style/AppTheme.Toolbar" >
+            app:theme="@style/AppTheme.Toolbar">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,8 +34,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="8dp">
-
-
 
 
                     <EditText
@@ -48,8 +47,8 @@
                         android:drawableLeft="@drawable/ic_search_light_gray_24dp"
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/calibri"
-                        android:lines="1"
                         android:hint="What are you looking for ?"
+                        android:lines="1"
                         android:maxLines="1"
                         android:padding="12dp"
                         android:textColor="@android:color/black"
@@ -65,7 +64,6 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
-
 
 
                 </LinearLayout>
@@ -296,14 +294,7 @@
 
         </ScrollView>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/menu_nav"
-            android:background="?android:attr/windowBackground"
-            android:layout_alignParentBottom="true" />
 
 
 

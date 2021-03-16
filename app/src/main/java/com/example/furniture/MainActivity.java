@@ -55,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
         loadingbar= new ProgressDialog(this);
 
 
-
+        if(mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+            finish();
+        }
 
 
 

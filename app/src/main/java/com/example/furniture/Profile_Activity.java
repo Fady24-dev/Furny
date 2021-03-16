@@ -37,22 +37,6 @@ public class Profile_Activity extends AppCompatActivity {
         profileUserName=findViewById(R.id.profile_user_name);
         profileEmailAddress=findViewById(R.id.profile_user_email);
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.profile_menu);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.profile_menu:
-                        return true;
-                    case R.id.home_menu:
-                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
-            }
-        });
 
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
