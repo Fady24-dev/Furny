@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,RegisterActivity.class));
+                finish();
             }
         });
 
@@ -128,8 +129,9 @@ public class MainActivity extends AppCompatActivity {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()){
                         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                        loadingbar.dismiss();
                         finish();
+                        loadingbar.dismiss();
+
                         // Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                     }
                     else {
