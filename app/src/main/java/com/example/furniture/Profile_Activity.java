@@ -20,8 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Profile_Activity extends AppCompatActivity {
-     TextView profileUserName,profileEmailAddress;
-     ImageView profileImage;
+    private  TextView profileUserName,profileEmailAddress;
+    private ImageView profileImage;
     private DatabaseReference reference;
     private FirebaseUser user;
     private String userID ;

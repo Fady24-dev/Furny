@@ -12,7 +12,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/standard"
         android:paddingTop="24dp"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
@@ -35,9 +35,8 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="8dp">
 
-
                     <EditText
-                        android:id="@+id/search_bar"
+                        android:id="@+id/search_bar_home"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -50,11 +49,12 @@
                         android:hint="What are you looking for ?"
                         android:lines="1"
                         android:maxLines="1"
+                        android:inputType="textCapWords"
+                        android:singleLine="true"
                         android:padding="12dp"
                         android:textColor="@android:color/black"
                         android:textColorHint="#aeaeae"
                         android:textSize="14sp" />
-
                 </RelativeLayout>
 
                 <LinearLayout
@@ -267,18 +267,6 @@
                     android:paddingRight="8dp"
                     android:paddingBottom="64dp">
 
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:weightSum="100">
-
-
-
-
-                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/hot_items_recyclerview"

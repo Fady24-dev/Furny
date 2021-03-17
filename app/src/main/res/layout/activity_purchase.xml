@@ -78,8 +78,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/calibri"
-                            android:text="S130"
-                            android:textColor="#8e8ef6"
+                            android:text="$130"
+                            android:textColor="@color/grey"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>

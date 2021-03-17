@@ -44,6 +44,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     //CircularImage
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
     //GoogleSceneForm
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
     //Firebase
