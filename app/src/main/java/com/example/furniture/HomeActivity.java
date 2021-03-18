@@ -109,6 +109,10 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         finish();
                         break;
+                    case R.id.cart_drawer:
+                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        break;
+
                 }
                 drawer.closeDrawer((GravityCompat.START));
                 return true;

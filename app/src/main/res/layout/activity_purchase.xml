@@ -150,14 +150,14 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/selected_item_buy_now_btn"
+                android:id="@+id/selected_item_add_to_cart_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:background="@drawable/buttonshape"
                 android:fontFamily="@font/calibri"
-                android:text="Buy Now"
+                android:text="Add To Cart"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="24sp" />
