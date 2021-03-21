@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CartActivity"
-            android:theme="@style/CartTheme"></activity>
+            android:theme="@style/CartTheme"
+            android:label="Cart">
+        </activity>
         <activity android:name=".SearchActivity" />
         <activity
             android:name=".DrawerActivity"
@@ -33,7 +35,9 @@
 
         <activity
             android:name=".Profile_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppTheme"
+            android:label="Profile"/>
         <activity
             android:name=".PurchaseActivity"
             android:screenOrientation="portrait" />

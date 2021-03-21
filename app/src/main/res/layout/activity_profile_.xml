@@ -7,10 +7,11 @@
     tools:context=".Profile_Activity">
 
 
+
     <RelativeLayout
         android:id="@+id/rellay1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="260dp"
         android:background="@drawable/grad"
         android:paddingBottom="20dp">
 
@@ -19,7 +20,7 @@
                 android:id="@+id/user_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_margin="15dp"
+                android:layout_marginTop="50dp"
                 android:layout_centerHorizontal="true"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="1dp"
@@ -53,16 +54,6 @@
             android:textSize="14sp" />
 
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_settings" />
-
     </RelativeLayout>
 
 
@@ -71,15 +62,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp">
+        android:layout_below="@id/rellay1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
             <LinearLayout

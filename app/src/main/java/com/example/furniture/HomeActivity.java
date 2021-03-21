@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -136,9 +137,11 @@ public class HomeActivity extends AppCompatActivity {
                 if(user != null){
                     String username= user.getName();
                     String email= user.getEmail();
+                    String image = user.getImage();
 
                     userNameTextView.setText(username);
                     userEmailTextView.setText(email);
+                    Picasso.with(getApplicationContext()).load(user.getImage()).into(profileImageView);
                 }
             }
 

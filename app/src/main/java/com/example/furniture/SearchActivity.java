@@ -77,6 +77,9 @@ public class SearchActivity extends AppCompatActivity {
                     case R.id.my_account_drawer:
                         startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
                         break;
+                    case R.id.cart_drawer:
+                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        break;
                     case R.id.log_out_drawer:
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -138,6 +141,7 @@ public class SearchActivity extends AppCompatActivity {
             FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                     .setQuery(Ref.orderByChild("name").startAt(searchInput).endAt(searchInput+"\uf8ff"),Products.class)
                     .build();
+
 
             // Connecting object of required Adapter class to
             searchProductAdapter= new SearchProductAdapter(options);

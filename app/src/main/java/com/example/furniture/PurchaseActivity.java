@@ -37,6 +37,7 @@ public class PurchaseActivity extends AppCompatActivity {
     String prodId, userID;
     DatabaseReference Ref;
     Context context;
+    String productImage;
 
 
     @Override
@@ -65,7 +66,7 @@ public class PurchaseActivity extends AppCompatActivity {
                         String productName=snapshot.child("name").getValue().toString();
                         String productPrice=snapshot.child("price").getValue().toString();
                         String productCategory=snapshot.child("category").getValue().toString();
-                        String productImage=snapshot.child("image").getValue().toString();
+                        productImage=snapshot.child("image").getValue().toString();
 
                         Picasso.with(context).load(productImage).into(prodImage);
                         prodName.setText(productName);
@@ -112,7 +113,8 @@ public class PurchaseActivity extends AppCompatActivity {
 
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("pid", prodId);
-        cartMap.put("pname", prodName.getText().toString());
+        cartMap.put("name", prodName.getText().toString());
+        cartMap.put("image",productImage);
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
 

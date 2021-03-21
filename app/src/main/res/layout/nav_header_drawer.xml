@@ -11,7 +11,7 @@
         android:layout_height="84dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/user" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_marginRight="16dp"
         android:textSize="18sp"
         android:layout_marginTop="15dp"
-        android:fontFamily="@font/calibri"
+        android:fontFamily="sans-serif-light"
         android:textStyle="bold"
         android:text="UserName"  />
 

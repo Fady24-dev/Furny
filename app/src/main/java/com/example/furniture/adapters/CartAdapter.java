@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso;
 
 public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.CartViewHolder> {
     private Context context;
-
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
@@ -35,6 +34,8 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
     protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Products model) {
         // Picasso.with(context).load(model.getImage()).into(holder.img_product);
         holder.txt_product_name.setText(model.getName());
+        Picasso.with(context).load(model.getImage()).into(holder.img_product);
+
     }
 
     @NonNull
@@ -55,8 +56,8 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            img_product = itemView.findViewById(R.id.img_product);
-            txt_product_name = itemView.findViewById(R.id.txt_product_name);
+           img_product = itemView.findViewById(R.id.img_product);
+           txt_product_name = itemView.findViewById(R.id.txt_product_name);
 
 
         }
