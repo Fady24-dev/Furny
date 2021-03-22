@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.example.furniture.adapters.CartAdapter;
 import com.example.furniture.adapters.HotProductAdapter;
@@ -42,6 +44,7 @@ public class CartActivity extends AppCompatActivity {
         //Firebase RecyclerView
         Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
         recyclerView = findViewById(R.id.recycler_cart);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

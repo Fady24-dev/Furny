@@ -94,6 +94,7 @@ public class PurchaseActivity extends AppCompatActivity {
             addCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     addToCart();
                 }
             });
@@ -117,6 +118,7 @@ public class PurchaseActivity extends AppCompatActivity {
         cartMap.put("image",productImage);
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
+        cartMap.put("price", prodPrice.getText().toString());
 
         userID = user.getUid();
 

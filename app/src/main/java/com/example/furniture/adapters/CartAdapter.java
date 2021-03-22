@@ -1,9 +1,11 @@
 package com.example.furniture.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +37,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
         // Picasso.with(context).load(model.getImage()).into(holder.img_product);
         holder.txt_product_name.setText(model.getName());
         Picasso.with(context).load(model.getImage()).into(holder.img_product);
+        holder.txt_product_price.setText(model.getPrice());
 
     }
 
@@ -51,13 +54,17 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
     class CartViewHolder extends RecyclerView.ViewHolder {
 
         ImageView img_product;
-        TextView txt_product_name;
+        TextView txt_product_name,txt_product_price;
+        Button deleteItem;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
 
            img_product = itemView.findViewById(R.id.img_product);
            txt_product_name = itemView.findViewById(R.id.txt_product_name);
+            txt_product_price=itemView.findViewById(R.id.product_price);
+            deleteItem=itemView.findViewById(R.id.delete_item_cart_btn);
+
 
 
         }
