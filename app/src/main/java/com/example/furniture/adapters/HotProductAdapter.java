@@ -41,6 +41,7 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
         holder.pName.setText(model.getName());
         holder.pPrice.setText("$"+model.getPrice());
         Picasso.with(context).load(model.getImage()).into(holder.pImage);
+
         holder.v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
