@@ -26,10 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 
 public class PurchaseActivity extends AppCompatActivity {
     private  Button previewBtn,addCart ;
@@ -40,7 +38,6 @@ public class PurchaseActivity extends AppCompatActivity {
     DatabaseReference Ref;
     Context context;
     String productImage;
-
 
 
     @Override

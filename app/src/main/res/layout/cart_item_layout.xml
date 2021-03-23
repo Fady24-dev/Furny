@@ -94,18 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp">
 
-            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                android:id="@+id/elegantNumberButton_quantity"
-                android:layout_width="80dp"
-                android:layout_height="20dp"
-                android:gravity="center"
-                app:initialNumber="1"
-                app:finalNumber="10"
-                app:backGroundColor="@color/standard"
-                android:layout_marginTop="100dp"
-                android:layout_marginLeft="125dp"
-                >
-            </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+
             <Button
                 android:id="@+id/delete_item_cart_btn"
                 android:layout_width="25dp"
@@ -116,6 +105,7 @@
                 android:background="@drawable/remove"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="100dp"
+
                 />
 
 
