@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_name_profile_drawer);
         TextView userEmailTextView = headerView.findViewById(R.id.email_user_drawer);
-        CircleImageView profileImageView = headerView.findViewById(R.id.header_profile_image_drawer);
+        ImageView profileImageView = headerView.findViewById(R.id.header_profile_image_drawer);
 
         Ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -39,7 +39,7 @@ public class PurchaseActivity extends AppCompatActivity {
     String prodId, userID;
     DatabaseReference Ref;
     Context context;
-    String productImage;
+    String productImage,prodModel;
 
 
 
@@ -55,6 +55,7 @@ public class PurchaseActivity extends AppCompatActivity {
             prodCategory = findViewById(R.id.selected_item_category);
             prodImage = findViewById(R.id.selected_item_image);
             user = FirebaseAuth.getInstance().getCurrentUser();
+            userID=user.getUid();
 
             context=this;
 
@@ -70,6 +71,7 @@ public class PurchaseActivity extends AppCompatActivity {
                         String productPrice=snapshot.child("price").getValue().toString();
                         String productCategory=snapshot.child("category").getValue().toString();
                         productImage=snapshot.child("image").getValue().toString();
+                        prodModel=snapshot.child("model").getValue().toString();
 
                         Picasso.with(context).load(productImage).into(prodImage);
                         prodName.setText(productName);
@@ -88,11 +90,17 @@ public class PurchaseActivity extends AppCompatActivity {
             previewBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(PurchaseActivity.this, ArActivity.class);
-                    intent.putExtra("id",prodId);
+                    Intent intent = new Intent(getApplicationContext(),ArActivity.class);
+                    intent.putExtra("pid",prodId);
+                    intent.putExtra("activity","purchase");
                     startActivity(intent);
+
+//                    final DatabaseReference prevRef = FirebaseDatabase.getInstance().getReference().child("Preview List").child("User List").child(userID).child("Products");
+//                    prevRef.removeValue();
+                    //addToPreview();
                 }
             });
+
 
             addCart.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,9 +123,11 @@ public class PurchaseActivity extends AppCompatActivity {
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
+        //Hash map to add values in "Products in Cart List"
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("pid", prodId);
         cartMap.put("name", prodName.getText().toString());
+        cartMap.put("model", prodModel);
         cartMap.put("image",productImage);
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
@@ -139,4 +149,29 @@ public class PurchaseActivity extends AppCompatActivity {
                     }
                 });
     }
+
+//    private void addToPreview() {
+//
+//        final DatabaseReference previewRef = FirebaseDatabase.getInstance().getReference().child("Preview List");
+//
+//        final HashMap<String, Object> cartMap = new HashMap<>();
+//        cartMap.put("pid", prodId);
+//        cartMap.put("name", prodName.getText().toString());
+//        cartMap.put("model", prodModel);
+//        cartMap.put("image",productImage);
+//        userID = user.getUid();
+//
+//        previewRef.child("User List").child(userID).child("Products").child(prodId)
+//                .updateChildren(cartMap)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                           startActivity(new Intent(getApplicationContext(),ArActivity.class));
+//                        }
+//                        else {
+//                        }
+//                    }
+//                });
+//    }
 }

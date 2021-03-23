@@ -62,8 +62,6 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
               prodID =getRef(holder.getAdapterPosition()).getKey();
               Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products").child(prodID);
               Ref.removeValue();
-
-
           }
       });
 
@@ -94,11 +92,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
            txt_product_name = itemView.findViewById(R.id.txt_product_name);
             txt_product_price=itemView.findViewById(R.id.product_price);
             deleteItem=itemView.findViewById(R.id.delete_item_cart_btn);
-
             v=itemView;
-
-
-
         }
     }
 }

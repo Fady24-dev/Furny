@@ -98,12 +98,6 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
         //Search bar
        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             String searchInput = searchBar.getText().toString();

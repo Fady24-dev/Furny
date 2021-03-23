@@ -20,4 +20,20 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:indeterminateDrawable="@drawable/progress"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ar_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+
+
+
+
+
+
 </RelativeLayout>
