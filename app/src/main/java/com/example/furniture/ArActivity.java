@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class ArActivity extends AppCompatActivity {
     private FirebaseUser user;
     private String userID,prodID;
     Boolean isPurchase;
+    String prodId,activity;
 
 
 
@@ -53,15 +56,22 @@ public class ArActivity extends AppCompatActivity {
 
 
 
+        activity = getIntent().getStringExtra("activity");
+        if(activity==null){
+            activity="none";
+        }
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
+
+        prodId =getIntent().getStringExtra("pid");
 
         //Firebase RecyclerView
         Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
 
         recyclerView = findViewById(R.id.ar_recycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,6));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
 
 
@@ -123,13 +133,11 @@ public class ArActivity extends AppCompatActivity {
 
 
         //To Preview Single Item From Purchase activity
-        String activity = getIntent().getStringExtra("activity");
-        Toast.makeText(this, activity, Toast.LENGTH_SHORT).show();
-        if(activity=="purchase"){
+        if(activity.equals("purchase")){
 
-            String prodId=getIntent().getStringExtra("id");
-            Ref= FirebaseDatabase.getInstance().getReference().child("Products");
-            Ref.child(prodId).addValueEventListener(new ValueEventListener() {
+            Log.d("test","if success");
+            DatabaseReference purchRef=FirebaseDatabase.getInstance().getReference().child("Products");
+            purchRef.child(prodId).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){

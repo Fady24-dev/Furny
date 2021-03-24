@@ -19,12 +19,12 @@
             android:id="@+id/hot_items_prodImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
+            android:fitsSystemWindows="true"
             android:src="@drawable/favorite_img_6" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:layout_alignBottom="@id/hot_items_prodImage"
             android:background="#4D000000"
             android:orientation="vertical"
@@ -36,9 +36,11 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/calibri"
                 android:text="Architectural"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,11 +54,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="80"
-                    android:fontFamily="@font/calibri"
+                    android:fontFamily="sans-serif-light"
                     android:text="$30"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                    />
 
             </LinearLayout>
 
