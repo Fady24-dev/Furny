@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,11 +19,22 @@ import com.example.furniture.interfaces.ItemClickListner;
 import com.example.furniture.models.Products;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 
 public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProductAdapter.productsViewholder> {
     private Context context;
+    private DatabaseReference Ref;
+    private FirebaseUser user;
+    private String prodID,userID;
 
 
     /**
@@ -38,6 +51,9 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
 
     @Override
     protected void onBindViewHolder(@NonNull HotProductAdapter.productsViewholder holder, int position, @NonNull Products model) {
+
+        prodID=getRef(position).getKey();
+
         holder.pName.setText(model.getName());
         holder.pPrice.setText("$"+model.getPrice());
         Picasso.with(context).load(model.getImage()).into(holder.pImage);
@@ -48,6 +64,38 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
                 Intent intent= new Intent(v.getContext(),PurchaseActivity.class);
                 intent.putExtra("pid",getRef(position).getKey());
                 v.getContext().startActivity(intent);
+            }
+        });
+        holder.fvrtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final DatabaseReference favRef = FirebaseDatabase.getInstance().getReference().child("Favourite List");
+                String prodId=getRef(position).getKey();
+                final HashMap<String, Object> favMap = new HashMap<>();
+                favMap.put("pid", model.getPid());
+                favMap.put("name", model.getName());
+                favMap.put("model", model.getModel());
+                favMap.put("image",model.getImage());
+                favMap.put("category", model.getCategory());
+                favMap.put("price", model.getPrice());
+                user= FirebaseAuth.getInstance().getCurrentUser();
+                userID = user.getUid();
+
+                favRef.child("User List").child(userID).child("Products").child(prodId)
+                .updateChildren(favMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, "Added To List", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(context, "Something went Wrong", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
             }
         });
 
@@ -65,9 +113,10 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
     }
 
     public static class productsViewholder extends RecyclerView.ViewHolder{
-        TextView pName, pPrice;
-        ImageView pImage;
-        View v;
+       public TextView pName, pPrice;
+        public ImageView pImage;
+        public ImageButton fvrtBtn;
+        public  View v;
         public ItemClickListner listner;
 
         public productsViewholder(@NonNull View itemView) {
@@ -75,6 +124,7 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
             pName = itemView.findViewById(R.id.hot_items_prodName);
             pPrice = itemView.findViewById(R.id.hot_items_prodPrice);
             pImage = itemView.findViewById(R.id.hot_items_prodImage);
+            fvrtBtn=itemView.findViewById(R.id.fav_btn);
             v=itemView;
         }
     }

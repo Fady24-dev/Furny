@@ -9,6 +9,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,10 +37,10 @@ public class PurchaseActivity extends AppCompatActivity {
     private ImageView prodImage;
     private TextView prodName,prodPrice,prodCategory;
     private FirebaseUser user;
-    String prodId, userID;
-    DatabaseReference Ref;
-    Context context;
-    String productImage,prodModel;
+    private String prodId, userID;
+    private DatabaseReference Ref;
+    private Context context;
+    private String productImage,prodModel;
 
 
 
@@ -58,9 +59,9 @@ public class PurchaseActivity extends AppCompatActivity {
             userID=user.getUid();
 
             context=this;
-
-
             prodId = getIntent().getStringExtra("pid");
+
+
 
             Ref= FirebaseDatabase.getInstance().getReference().child("Products");
             Ref.child(prodId).addValueEventListener(new ValueEventListener() {
