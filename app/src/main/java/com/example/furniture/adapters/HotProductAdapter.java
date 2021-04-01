@@ -66,6 +66,7 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
                 v.getContext().startActivity(intent);
             }
         });
+
         holder.fvrtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +82,8 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
                 favMap.put("price", model.getPrice());
                 user= FirebaseAuth.getInstance().getCurrentUser();
                 userID = user.getUid();
+                holder.fvrtBtn.setImageResource(R.drawable.ic_favorite_red_24dp);
+
 
                 favRef.child("User List").child(userID).child("Products").child(prodId)
                 .updateChildren(favMap)
@@ -88,7 +91,7 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Added To List", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Added To Wishlist", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Toast.makeText(context, "Something went Wrong", Toast.LENGTH_SHORT).show();
@@ -128,6 +131,7 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
             v=itemView;
         }
     }
+
 
 
 }

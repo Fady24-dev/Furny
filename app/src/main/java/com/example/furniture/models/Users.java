@@ -1,7 +1,7 @@
 package com.example.furniture.models;
 
 public class Users {
-    private String name,email,image;
+    private String name,email,image,phone,address,facebook;
 
     public Users(String name, String email) {
         this.name = name;

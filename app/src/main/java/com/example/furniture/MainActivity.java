@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             loadingbar.setMessage("Please Wait.");
             loadingbar.setCanceledOnTouchOutside(false);
             loadingbar.show();
-
            AllowAccessToAccount(email,pass);
         }
     }

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.furniture.adapters.CartAdapter;
@@ -41,6 +42,7 @@ public class CartActivity extends AppCompatActivity {
     private CartAdapter CartAdapter;
     private FirebaseUser user;
     private Button previewBtn;
+    private TextView totalPrice;
     List<Products> productsList = new ArrayList<>();
 
     String userID,prodId;
@@ -53,7 +55,7 @@ public class CartActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         previewBtn=findViewById(R.id.preview_allcart_btn);
-
+        totalPrice=findViewById(R.id.total_cart_price);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
@@ -110,6 +112,8 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     @Override
     protected void onStart() {

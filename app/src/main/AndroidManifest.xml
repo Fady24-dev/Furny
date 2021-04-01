@@ -16,10 +16,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CartActivity"
+        <activity android:name=".WishListActivity"
+            android:label="Wishlist"
             android:theme="@style/CartTheme"
-            android:label="Cart">
+            >
+
         </activity>
+        <activity
+            android:name=".CartActivity"
+            android:label="Cart"
+            android:theme="@style/CartTheme"></activity>
         <activity android:name=".SearchActivity" />
         <activity
             android:name=".DrawerActivity"
@@ -35,9 +41,9 @@
 
         <activity
             android:name=".Profile_Activity"
+            android:label="Profile"
             android:screenOrientation="portrait"
-            android:theme="@style/MyAppTheme"
-            android:label="Profile"/>
+            android:theme="@style/MyAppTheme" />
         <activity
             android:name=".PurchaseActivity"
             android:screenOrientation="portrait" />

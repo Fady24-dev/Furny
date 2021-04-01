@@ -80,13 +80,26 @@
                     android:layout_centerVertical="true"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:text="Product ID:"
+                    android:text="ID:#"
+                    android:textColor="#AEAEAE"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/cart_product_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="132233666"
+                    android:layout_toRightOf="@id/product_id"
                     android:textColor="#AEAEAE"
                     android:textSize="15dp" />
 
 
 
-                </RelativeLayout>
+
+            </RelativeLayout>
 
             </RelativeLayout>
         <RelativeLayout
