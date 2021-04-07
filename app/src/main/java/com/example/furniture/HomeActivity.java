@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -19,14 +18,16 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.furniture.adapters.HotProductAdapter;
+import com.example.furniture.adapters.SearchProductAdapter;
 import com.example.furniture.models.Products;
 import com.example.furniture.models.Users;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,29 +39,81 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HotProductAdapter hotProductAdapter;
     private DatabaseReference Ref;
     private FirebaseUser user;
-    private String userID,searchInput ;
+    private String userID,searchInput;
     private EditText searchBar;
     private ImageView chairsCategory,sofaHotItem,profileBtn;
     private FloatingActionButton floatingActionButton;
     private int numberOfColumns = 2;
+    private LinearLayout chairCatLayout,bedLayout,sofaLayout,closetLayout,officeLayout;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_home);
-
         searchBar=findViewById(R.id.search_bar_home);
+        chairCatLayout = findViewById(R.id.chair_Cat_Selection);
+        bedLayout = findViewById(R.id.Bed_Cat_Selection);
+        sofaLayout = findViewById(R.id.Sofa_Cat_Selection);
+        closetLayout = findViewById(R.id.closet_Cat_Selection);
+        officeLayout = findViewById(R.id.Office_Cat_Selection);
+
+        bedLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
+                intent.putExtra("category","Beds");
+                v.getContext().startActivity(intent);
+            }
+        });
 
 
+        chairCatLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
+                intent.putExtra("category","Chairs");
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        sofaLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
+                intent.putExtra("category","Sofas");
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        closetLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
+                intent.putExtra("category","Closets");
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        officeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
+                intent.putExtra("category","Offices");
+                v.getContext().startActivity(intent);
+            }
+        });
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         Ref=FirebaseDatabase.getInstance().getReference("Users");
@@ -71,6 +124,7 @@ public class HomeActivity extends AppCompatActivity {
 
        Toolbar toolbar = findViewById(R.id.toolbar_home);
        setSupportActionBar(toolbar);
+
 
 
        //Search bar Clicking enter
@@ -156,7 +210,7 @@ public class HomeActivity extends AppCompatActivity {
         Ref= FirebaseDatabase.getInstance().getReference().child("Products");
         recyclerView = findViewById(R.id.hot_items_recyclerview);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2 ));
 
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
