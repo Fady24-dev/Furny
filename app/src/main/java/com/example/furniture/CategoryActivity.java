@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.furniture.adapters.HotProductAdapter;
 import com.example.furniture.adapters.SearchProductAdapter;
@@ -28,6 +29,7 @@ public class CategoryActivity extends AppCompatActivity {
     private LinearLayout chairCatLayout,bedLayout,sofaLayout,closetLayout,officeLayout;
     private String category;
     private SearchProductAdapter searchProductAdapter;
+    private TextView textView;
 
 
     @Override
@@ -40,6 +42,9 @@ public class CategoryActivity extends AppCompatActivity {
         sofaLayout = findViewById(R.id.SofaCatSelection);
         closetLayout = findViewById(R.id.closetCatSelection);
         officeLayout = findViewById(R.id.OfficeCatSelection);
+        textView = findViewById(R.id.products_type);
+
+        textView.setText(category);
 
 
         bedLayout.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +74,7 @@ public class CategoryActivity extends AppCompatActivity {
         officeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                category = "Offices";
+                category = "Office Desks";
                 getData();
             }
         });
@@ -91,6 +96,7 @@ public class CategoryActivity extends AppCompatActivity {
         }
         private void getData()
         {
+            textView.setText(category);
             Ref= FirebaseDatabase.getInstance().getReference().child("Products");
             recyclerView = findViewById(R.id.category_items_recyclerview);
             recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),numberOfColumns));

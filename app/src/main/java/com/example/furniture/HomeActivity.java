@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent= new Intent(v.getContext(),CategoryActivity.class);
-                intent.putExtra("category","Offices");
+                intent.putExtra("category","Office Desks");
                 v.getContext().startActivity(intent);
             }
         });
