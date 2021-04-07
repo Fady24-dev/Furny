@@ -28,12 +28,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 
 public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.CartViewHolder> {
     private Context context;
     private DatabaseReference Ref;
     private FirebaseUser user;
-    private String userID,prodID;
+    private String userID,prodID,totalPrice;
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
@@ -50,12 +52,21 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
         holder.txt_product_name.setText(model.getName());
         Picasso.with(context).load(model.getImage()).into(holder.img_product);
         holder.txt_product_price.setText(model.getPrice());
+        holder.txt_poduct_id.setText(model.getPid());
+
+        HashMap<String,Object> total = new HashMap<>();
+       totalPrice=totalPrice+"+"+model.getPrice();
+        total.put("Total Price",totalPrice);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
 
+        Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID);
+        Ref.updateChildren(total);
 
-      holder.deleteItem.setOnClickListener(new View.OnClickListener() {
+
+        holder.deleteItem.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               //Don't ever use position inside of listeners
@@ -81,7 +92,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
     class CartViewHolder extends RecyclerView.ViewHolder {
 
         ImageView img_product;
-        TextView txt_product_name,txt_product_price;
+        TextView txt_product_name,txt_product_price,txt_poduct_id;
         Button deleteItem;
         View v;
 
@@ -92,6 +103,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.C
            txt_product_name = itemView.findViewById(R.id.txt_product_name);
             txt_product_price=itemView.findViewById(R.id.product_price);
             deleteItem=itemView.findViewById(R.id.delete_item_cart_btn);
+            txt_poduct_id=itemView.findViewById(R.id.cart_product_id);
             v=itemView;
         }
     }

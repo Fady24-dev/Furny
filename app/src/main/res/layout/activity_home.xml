@@ -80,10 +80,6 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         >
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -361,14 +357,6 @@
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="64dp">
 
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -378,13 +366,12 @@
                         android:layout_height="match_parent"
                         />
 
-                </LinearLayout>
+
 
 
 
             </LinearLayout>
 
-        </ScrollView>
 
 
 

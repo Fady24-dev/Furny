@@ -70,7 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 CreateAccount() ;
             }
         });

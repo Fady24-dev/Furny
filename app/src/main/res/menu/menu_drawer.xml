@@ -22,7 +22,7 @@
         <item
             android:id="@+id/wish_list_drawer"
             android:icon="@drawable/fav_icon"
-            android:title="Wish List"
+            android:title="Wishlist"
             app:showAsAction="always"/>
 
         <item
@@ -34,7 +34,7 @@
         <item
             android:id="@+id/cart_drawer"
             android:icon="@drawable/ic_shopping_cart_white_24dp"
-            android:title="Cart"
+            android:title="My Cart"
             app:showAsAction="always"/>
 
 

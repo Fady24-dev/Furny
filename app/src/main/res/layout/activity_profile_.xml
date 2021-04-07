@@ -15,7 +15,6 @@
         android:background="@drawable/grad"
         android:paddingBottom="20dp">
 
-
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_image"
             android:layout_width="120dp"
@@ -53,11 +52,7 @@
             android:textColor="@color/address"
             android:textSize="14sp" />
 
-
     </RelativeLayout>
-
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,12 +67,12 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/calibri"
@@ -85,30 +80,44 @@
                     android:textColor="@color/headings"
                     android:textSize="15sp" />
 
+
                 <TextView
                     android:id="@+id/profile_user_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/email"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Example@mail.com"
                     android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:visibility="invisible"
+                    android:id="@+id/profile_user_email_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/email"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#000000"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignBottom="@id/profile_user_email_edit"
                     android:layout_marginTop="15dp"
                     android:background="@color/lightgrey" />
+            </RelativeLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/phone"
                     android:fontFamily="@font/calibri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,28 +126,43 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/profile_user_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/phone"
                     android:fontFamily="sans-serif-thin"
-                    android:text="+1-202-555-0157"
                     android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:visibility="invisible"
+                    android:id="@+id/profile_user_phone_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/phone"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#000000"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignBottom="@id/profile_user_phone_edit"
                     android:layout_marginTop="15dp"
                     android:background="@color/lightgrey" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/address"
                     android:fontFamily="@font/calibri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,28 +171,43 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/profile_user_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/address"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Street 25"
                     android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/profile_user_address_edit"
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/address"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#000000"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignBottom="@id/profile_user_address_edit"
                     android:layout_marginTop="15dp"
                     android:background="@color/lightgrey" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/facebook"
                     android:fontFamily="@font/calibri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,23 +216,64 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/profile_user_facebook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/facebook"
                     android:fontFamily="sans-serif-thin"
-                    android:text="facebook.com/user"
                     android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:visibility="invisible"
+                    android:id="@+id/profile_user_facebook_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/facebook"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#000000"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignBottom="@id/profile_user_facebook_edit"
                     android:layout_marginTop="15dp"
                     android:background="@color/lightgrey" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="10dp">
+
+            <Button
+                android:visibility="invisible"
+                android:id="@+id/profile_submit_button"
+                android:layout_width="20dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Submit" />
+
+            <Button
+                android:id="@+id/profile_edit_button"
+                android:layout_width="20dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Edit" />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
