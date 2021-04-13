@@ -1,20 +1,30 @@
 package com.example.furniture;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.furniture.models.Users;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,18 +33,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
 public class Profile_Activity extends AppCompatActivity {
-    private TextView profileUserName,profileEmailAddress,profileUserPhone,profileUserAddress,profileUserFacebook;
+    private TextView profileUserName;
     private EditText profileUserEmailEdit,profileUserPhoneEdit,profileUserAddressEdit,profileUserFacebookEdit;
     private ImageView profileImage;
     private Button editButton,submitButton;
     private DatabaseReference reference;
     private FirebaseUser user;
-    private String userID,currentEmail;
+    private String userID;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +60,10 @@ public class Profile_Activity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference("Users");
+        storageReference = FirebaseStorage.getInstance().getReference();
         userID=user.getUid();
-        currentEmail=user.getEmail();
         profileUserName=findViewById(R.id.profile_user_name);
-        profileEmailAddress=findViewById(R.id.profile_user_email);
-        profileUserAddress=findViewById(R.id.profile_user_address);
-        profileUserFacebook=findViewById(R.id.profile_user_facebook);
         profileImage=findViewById(R.id.user_image);
-        profileUserPhone=findViewById(R.id.profile_user_phone);
         editButton=findViewById(R.id.profile_edit_button);
         submitButton=findViewById(R.id.profile_submit_button);
         profileUserEmailEdit=findViewById(R.id.profile_user_email_edit);
@@ -66,20 +76,13 @@ public class Profile_Activity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profileEmailAddress.setVisibility(View.INVISIBLE);
-                profileUserEmailEdit.setVisibility(View.VISIBLE);
-
-                profileUserPhone.setVisibility(View.INVISIBLE);
-                profileUserPhoneEdit.setVisibility(View.VISIBLE);
-
-                profileUserAddress.setVisibility(View.INVISIBLE);
-                profileUserAddressEdit.setVisibility(View.VISIBLE);
-
-                profileUserFacebook.setVisibility(View.INVISIBLE);
-                profileUserFacebookEdit.setVisibility(View.VISIBLE);
-
                 editButton.setVisibility(View.INVISIBLE);
                 submitButton.setVisibility(View.VISIBLE);
+
+                profileUserEmailEdit.setEnabled(true);
+                profileUserPhoneEdit.setEnabled(true);
+                profileUserAddressEdit.setEnabled(true);
+                profileUserFacebookEdit.setEnabled(true);
 
                 readData();
             }
@@ -88,22 +91,48 @@ public class Profile_Activity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profileEmailAddress.setVisibility(View.VISIBLE);
-                profileUserEmailEdit.setVisibility(View.INVISIBLE);
-
-                profileUserPhone.setVisibility(View.VISIBLE);
-                profileUserPhoneEdit.setVisibility(View.INVISIBLE);
-
-                profileUserAddress.setVisibility(View.VISIBLE);
-                profileUserAddressEdit.setVisibility(View.INVISIBLE);
-
-                profileUserFacebook.setVisibility(View.VISIBLE);
-                profileUserFacebookEdit.setVisibility(View.INVISIBLE);
+                profileUserEmailEdit.setEnabled(false);
+                profileUserPhoneEdit.setEnabled(false);
+                profileUserAddressEdit.setEnabled(false);
+                profileUserFacebookEdit.setEnabled(false);
 
                 editButton.setVisibility(View.VISIBLE);
                 submitButton.setVisibility(View.INVISIBLE);
 
                 submitData();
+            }
+        });
+
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, 1000);
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000){
+            if(resultCode == Activity.RESULT_OK){
+                Uri imageUri = data.getData();
+
+                uploadImage(imageUri);
+            }
+        }
+    }
+
+    private void uploadImage(Uri imageUri) {
+        StorageReference fileRef = storageReference.child("UserImages/"+userID+"/profile.jpg");
+        fileRef.putFile(imageUri);
+
+        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                reference.child(userID).child("image").setValue(uri.toString());
             }
         });
     }
@@ -158,12 +187,12 @@ public class Profile_Activity extends AppCompatActivity {
                     String facebook = user.getFacebook();
 
                     profileUserName.setText(username);
-                    profileEmailAddress.setText(email);
-                    profileUserPhone.setText(phone);
-                    profileUserAddress.setText(address);
-                    profileUserFacebook.setText(facebook);
+                    profileUserEmailEdit.setText(email);
+                    profileUserPhoneEdit.setText(phone);
+                    profileUserAddressEdit.setText(address);
+                    profileUserFacebookEdit.setText(facebook);
 
-                    Picasso.with(getApplicationContext()).load(user.getImage()).into(profileImage);
+                    Picasso.with(getApplicationContext()).load(image).into(profileImage);
                 }
             }
 
