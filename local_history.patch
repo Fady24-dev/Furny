@@ -1,0 +1,27 @@
+Index: app/src/main/java/com/example/furniture/HomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/furniture/HomeActivity.java	(date 1613699743227)
++++ app/src/main/java/com/example/furniture/HomeActivity.java	(date 1613699743227)
+@@ -40,13 +40,13 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_home);
+ 
+-        Toolbar toolbar = findViewById(R.id.toolbar);
++       // Toolbar toolbar = findViewById(R.id.toolbar);
+ 
+-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+-                this, drawer, toolbar, R.string.navigtaion_drawer_open, R.string.navigtaion_drawer_close);
+-        drawer.addDrawerListener(toggle);
+-        toggle.syncState();
++//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
++//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
++//                this, drawer, toolbar, R.string.navigtaion_drawer_open, R.string.navigtaion_drawer_close);
++//        drawer.addDrawerListener(toggle);
++//        toggle.syncState();
+ 
+ 
+ 
