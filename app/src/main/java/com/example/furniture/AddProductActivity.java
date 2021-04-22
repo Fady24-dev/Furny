@@ -42,12 +42,11 @@ public class AddProductActivity extends AppCompatActivity  {
     private EditText InputProductName, InputProductCateogyr, InputProductPrice;
     private static final int GalleryPick = 1;
     private Uri filePath;
-    private TextView uploadFile;
     private String productRandomKey, downloadImageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
-    private Button uploadBtn, chooseBtn;
+    private Button uploadFile,uploadBtn, chooseBtn;
     private static final int IMAGE_PICK_CODE =1000;
     private static final int PERMISSION_CODE =1001;
     private Uri imageUri ;
@@ -108,7 +107,7 @@ public class AddProductActivity extends AppCompatActivity  {
         //TO PICK AN IMAGE FROM GALLERY
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("file/*");
+        intent.setType("*/*");
         startActivityForResult(intent,GalleryPick);
     }
     @Override
@@ -256,12 +255,12 @@ public class AddProductActivity extends AppCompatActivity  {
                     }
                 });
     }
-private void ShowFile () {
+/*private void ShowFile () {
     Intent intent = new Intent();
     intent.setType("file/*");
     intent.setAction(Intent.ACTION_GET_CONTENT);
     startActivityForResult(Intent.createChooser(intent,"Select File"), GalleryPick);
-}
+}*/
 
 
 }
