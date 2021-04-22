@@ -3,46 +3,61 @@ package com.example.furniture;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+=======
+import com.example.furniture.adapters.CartAdapter;
+import com.example.furniture.adapters.HotProductAdapter;
+>>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
 import com.example.furniture.models.Products;
-import com.example.furniture.viewholders.CartViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CartActivity extends AppCompatActivity {
 
-    DatabaseReference Ref,priceRef;
+    DatabaseReference Ref;
     RecyclerView recyclerView;
+    private CartAdapter CartAdapter;
     private FirebaseUser user;
     private Button previewBtn;
-    private TextView totalPrice;
-    private String prodID;
+<<<<<<< HEAD
+    private TextView totalPrice,emptyTxt;
+    private String prodID,elegantCount;
     private int overTotalPrice;
-   // private int overTotalPrice;
 
+    // private int overTotalPrice;
+=======
+    private TextView totalPrice;
+    List<Products> productsList = new ArrayList<>();
+>>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
 
-    String userID;
+    String userID,prodId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +68,8 @@ public class CartActivity extends AppCompatActivity {
 
         previewBtn=findViewById(R.id.preview_allcart_btn);
         totalPrice=findViewById(R.id.total_cart_price);
+        emptyTxt=findViewById(R.id.empty_recycler_cart);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
@@ -60,10 +77,19 @@ public class CartActivity extends AppCompatActivity {
         //Firebase RecyclerView
         Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
         recyclerView = findViewById(R.id.recycler_cart);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        totalPrice.setText(String.valueOf(overTotalPrice));
+
+        // query in the database to fetch appropriate data
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(Ref,Products.class)
+                .build();
+
+        // Connecting object of required Adapter class to
+        CartAdapter = new CartAdapter(options);
+        recyclerView.setAdapter(CartAdapter);
+
+
 
         previewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,9 +128,12 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
+<<<<<<< HEAD
 
             //To Preview RecyclerView
             FirebaseRecyclerOptions<Products> options =
@@ -113,38 +142,53 @@ public class CartActivity extends AppCompatActivity {
                             .build();
 
             FirebaseRecyclerAdapter<Products, CartViewHolder> adapter= new FirebaseRecyclerAdapter<Products, CartViewHolder>(options) {
+
                 @Override
                 protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Products model) {
-                    // Picasso.with(context).load(model.getImage()).into(holder.img_product);
-                    holder.txt_product_name.setText(model.getName());
-                    Picasso.with(getApplicationContext()).load(model.getImage()).into(holder.img_product);
-                    holder.txt_product_price.setText("$"+model.getPrice());
-                    holder.txt_poduct_id.setText(model.getPid());
-
-                    // to count the total price in cart
-                   // int  oneProductPrice = Integer.parseInt(model.getPrice());
-                   // int oneProductQuantity = Integer.parseInt(model.getProduct_quantity());
-                   // int oneTyprProductTPrice = oneProductPrice*oneProductQuantity;
-                    //overTotalPrice = overTotalPrice + oneProductPrice;
-                   //totalPrice.setText(String.valueOf(overTotalPrice));
 
 
-                    //priceRef =FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID);
-                    //priceRef.child("Total Price").setValue(overTotalPrice);
+
+                        // Picasso.with(context).load(model.getImage()).into(holder.img_product);
+                        holder.txt_product_name.setText(model.getName());
+                        Picasso.with(getApplicationContext()).load(model.getImage()).into(holder.img_product);
+                        holder.txt_product_price.setText("$"+model.getPrice());
+                        holder.txt_poduct_id.setText(model.getPid());
+
+                        // to count the total price in cart
 
 
-                    holder.deleteItem.setOnClickListener(new View.OnClickListener() {
+                         int oneProductPrice = Integer.parseInt(model.getPrice());
+                        // int oneProductQuantity = Integer.parseInt(elegantCount);
+                         //int oneTyprProductTPrice = oneProductPrice*oneProductQuantity;
+                        overTotalPrice = overTotalPrice + oneProductPrice;
+                        totalPrice.setText(String.valueOf(overTotalPrice));
+
+                    holder.countButton.setOnClickListener(new ElegantNumberButton.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
-                            //Don't ever use position inside of listeners
-                            prodID =getRef(holder.getAdapterPosition()).getKey();
-                            Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products").child(prodID);
-                            Ref.removeValue();
+                        public void onClick(View view) {
+                            elegantCount =  holder.countButton.getNumber();
                         }
                     });
 
+                        priceRef =FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID);
+                        priceRef.child("Total Price").setValue(overTotalPrice);
 
-                }
+
+                        holder.deleteItem.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //Don't ever use position inside of listeners
+                                prodID =getRef(holder.getAdapterPosition()).getKey();
+                                Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products").child(prodID);
+                                overTotalPrice=overTotalPrice-oneProductPrice;
+                                totalPrice.setText(String.valueOf(overTotalPrice));
+                                Ref.removeValue();
+                                Toast.makeText(CartActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
 
                 @NonNull
                 @Override
@@ -159,8 +203,16 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
 
+=======
+        CartAdapter.startListening();
+>>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        CartAdapter.stopListening();
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

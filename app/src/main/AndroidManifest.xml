@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.furniture">
+    <!-- //adding read external storage permission -->
+    <!--  <usees-permission android:name="android.permission.Read_External_Storage" /> -->
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.CAMERA" />
+      <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-feature
-        android:name="android.hardware.camera.ar"
-        android:required="true" />
+      <uses-feature
+          android:name="android.hardware.camera.ar"
+          android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -16,20 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".CategoryActivity"></activity>
-
-        <activity android:name=".WishListActivity"
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".CategoryActivity" />
+        <activity
+            android:name=".WishListActivity"
             android:label="Wishlist"
-            android:theme="@style/CartTheme"
-            >
-
-        </activity>
-
+            android:theme="@style/CartTheme"></activity>
         <activity
             android:name=".CartActivity"
             android:label="Cart"
-            android:theme="@style/CartTheme"></activity>
+            android:theme="@style/CartTheme" />
         <activity android:name=".SearchActivity" />
         <activity
             android:name=".DrawerActivity"

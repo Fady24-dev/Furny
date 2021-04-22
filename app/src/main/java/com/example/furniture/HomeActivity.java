@@ -44,89 +44,31 @@ public class HomeActivity extends AppCompatActivity {
     private HotProductAdapter hotProductAdapter;
     private DatabaseReference Ref;
     private FirebaseUser user;
-    private String userID,searchInput;
+    private String userID,searchInput ;
     private EditText searchBar;
-    private ImageView chairsCategory,sofaHotItem,profileBtn;
-    private FloatingActionButton floatingActionButton;
-    private int numberOfColumns = 2;
     private LinearLayout chairCatLayout,bedLayout,sofaLayout,closetLayout,officeLayout;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_home);
+
         searchBar=findViewById(R.id.search_bar_home);
-        chairCatLayout = findViewById(R.id.chair_Cat_Selection);
-        bedLayout = findViewById(R.id.Bed_Cat_Selection);
-        sofaLayout = findViewById(R.id.Sofa_Cat_Selection);
-        closetLayout = findViewById(R.id.closet_Cat_Selection);
-        officeLayout = findViewById(R.id.Office_Cat_Selection);
-
-        bedLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
-                intent.putExtra("category","Beds");
-                v.getContext().startActivity(intent);
-            }
-        });
 
 
-        chairCatLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
-                intent.putExtra("category","Chairs");
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        sofaLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
-                intent.putExtra("category","Sofas");
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        closetLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
-                intent.putExtra("category","Closets");
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        officeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent= new Intent(v.getContext(),CategoryActivity.class);
-                intent.putExtra("category","Office Desks");
-                v.getContext().startActivity(intent);
-            }
-        });
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         Ref=FirebaseDatabase.getInstance().getReference("Users");
         userID=user.getUid();
 
-
-
-
        Toolbar toolbar = findViewById(R.id.toolbar_home);
        setSupportActionBar(toolbar);
 
+<<<<<<< HEAD
+=======
 
-
+>>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
        //Search bar Clicking enter
        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
            @Override
@@ -170,6 +112,26 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.wish_list_drawer:
                         startActivity(new Intent(getApplicationContext(),WishListActivity.class));
                         break;
+<<<<<<< HEAD
+                    case R.id.share_drawer:
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        String shareBody="New Release VR Shopping,TRY IT NOW:"+"\n https://web.facebook.com/Fady.RR24/";
+                        String shareSub="Furniture App,Share now!";
+                        intent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+                        intent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                        startActivity(Intent.createChooser(intent,"Share Using"));
+                        break;
+
+                    case R.id.settings_drawer:
+                        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+                        break;
+=======
+                    case R.id.orders_drawer:
+                        startActivity(new Intent(getApplicationContext(), AddProductActivity.class));
+                        break;
+
+>>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
 
                 }
                 drawer.closeDrawer((GravityCompat.START));
@@ -186,6 +148,13 @@ public class HomeActivity extends AppCompatActivity {
         TextView userNameTextView = headerView.findViewById(R.id.user_name_profile_drawer);
         TextView userEmailTextView = headerView.findViewById(R.id.email_user_drawer);
         ImageView profileImageView = headerView.findViewById(R.id.header_profile_image_drawer);
+
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
+            }
+        });
 
         Ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -213,7 +182,7 @@ public class HomeActivity extends AppCompatActivity {
         Ref= FirebaseDatabase.getInstance().getReference().child("Products");
         recyclerView = findViewById(R.id.hot_items_recyclerview);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2 ));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
 
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
