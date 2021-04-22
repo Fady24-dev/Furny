@@ -3,61 +3,48 @@ package com.example.furniture;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-=======
-import com.example.furniture.adapters.CartAdapter;
-import com.example.furniture.adapters.HotProductAdapter;
->>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
 import com.example.furniture.models.Products;
+import com.example.furniture.viewholders.CartViewHolder;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CartActivity extends AppCompatActivity {
 
-    DatabaseReference Ref;
+    DatabaseReference Ref,priceRef;
     RecyclerView recyclerView;
-    private CartAdapter CartAdapter;
     private FirebaseUser user;
     private Button previewBtn;
-<<<<<<< HEAD
     private TextView totalPrice,emptyTxt;
     private String prodID,elegantCount;
     private int overTotalPrice;
 
     // private int overTotalPrice;
-=======
-    private TextView totalPrice;
-    List<Products> productsList = new ArrayList<>();
->>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
 
-    String userID,prodId;
+
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,18 +64,10 @@ public class CartActivity extends AppCompatActivity {
         //Firebase RecyclerView
         Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
         recyclerView = findViewById(R.id.recycler_cart);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-        // query in the database to fetch appropriate data
-        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(Ref,Products.class)
-                .build();
-
-        // Connecting object of required Adapter class to
-        CartAdapter = new CartAdapter(options);
-        recyclerView.setAdapter(CartAdapter);
-
+        totalPrice.setText(String.valueOf(overTotalPrice));
 
 
         previewBtn.setOnClickListener(new View.OnClickListener() {
@@ -128,12 +107,9 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     protected void onStart() {
         super.onStart();
-<<<<<<< HEAD
 
             //To Preview RecyclerView
             FirebaseRecyclerOptions<Products> options =
@@ -203,16 +179,8 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
 
-=======
-        CartAdapter.startListening();
->>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        CartAdapter.stopListening();
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

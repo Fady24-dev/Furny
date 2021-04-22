@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
 
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_home"
             android:layout_width="match_parent"
@@ -69,6 +70,8 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
+
+
     </com.google.android.material.appbar.AppBarLayout>
     
     <RelativeLayout
@@ -100,6 +103,7 @@
                     android:scrollbars="none">
 
                     <LinearLayout
+                        android:id="@+id/myCate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -115,7 +119,6 @@
                             app:contentPadding="12dp">
 
                             <LinearLayout
-<<<<<<< HEAD
                                 android:clickable="true"
                                 android:id="@+id/closet_Cat_Selection"
                                 android:layout_width="106dp"
@@ -162,16 +165,13 @@
                             <LinearLayout
                                 android:id="@+id/Sofa_Cat_Selection"
                                 android:layout_width="106dp"
-=======
-                                android:layout_width="100dp"
->>>>>>> 7b0bab295efa4e7f08c54ae0ee7d2275b6143c15
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
-                                    android:src="@drawable/plant_white_bg" />
+                                    android:src="@drawable/sofa" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -182,7 +182,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/calibri"
-                                        android:text="Plant"
+                                        android:text="Sofa"
                                         android:textColor="#3C3C3C"
                                         android:textSize="16sp" />
 
@@ -208,14 +208,15 @@
                             app:contentPadding="12dp">
 
                             <LinearLayout
-                                android:layout_width="100dp"
+                                android:id="@+id/Bed_Cat_Selection"
+                                android:layout_width="106dp"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
-                                    android:src="@drawable/lamp_white_bg" />
+                                    android:src="@drawable/bed" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -226,7 +227,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/calibri"
-                                        android:text="Lamp"
+                                        android:text="Bed"
                                         android:textColor="#3C3C3C"
                                         android:textSize="16sp" />
 
@@ -252,21 +253,71 @@
                             app:contentPadding="12dp">
 
                             <LinearLayout
+                                android:id="@+id/Office_Cat_Selection"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <ImageView
+                                    android:layout_width="46dp"
+                                    android:layout_height="37dp"
+                                    android:src="@drawable/office" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="Office Desk"
+                                        android:textColor="#3C3C3C"
+                                        android:textSize="16sp" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:src="@drawable/ic_arrow_forward_black_24dp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp"
+                            app:cardUseCompatPadding="true"
+                            app:contentPadding="12dp">
+
+                            <LinearLayout
+                                android:clickable="true"
+                                android:id="@+id/chair_Cat_Selection"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:clickable="false"
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
                                     android:src="@drawable/chair_white_bg" />
 
                                 <RelativeLayout
+                                    android:clickable="false"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="16dp">
 
                                     <TextView
+                                        android:clickable="false"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/calibri"
@@ -275,6 +326,7 @@
                                         android:textSize="16sp" />
 
                                     <ImageView
+                                        android:clickable="false"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentTop="true"
@@ -309,6 +361,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         />
+
 
 
 
