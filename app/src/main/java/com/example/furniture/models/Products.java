@@ -1,7 +1,7 @@
 package com.example.furniture.models;
 
 public class Products {
-    private String name,price,category,image,pid,model;
+    private String name,price,category,image,pid,model,description;
 
     public Products() {
     }
@@ -15,7 +15,13 @@ public class Products {
         this.model=model;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getModel() {
         return model;

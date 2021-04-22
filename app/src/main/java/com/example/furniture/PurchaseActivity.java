@@ -42,10 +42,7 @@ public class PurchaseActivity extends AppCompatActivity {
     private String prodId, userID;
     private DatabaseReference Ref;
     private Context context;
-    private String productImage,prodModel ,productPrice;
-
-
-
+    private String productImage,prodModel;
 
 
 
@@ -53,6 +50,7 @@ public class PurchaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_purchase);
+
             previewBtn = findViewById(R.id.selected_item_preview_btn);
             fvrtBtn=findViewById(R.id.fav_purchase_btn);
             addCart = findViewById(R.id.selected_item_add_to_cart_btn);
@@ -74,12 +72,10 @@ public class PurchaseActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
                         String productName=snapshot.child("name").getValue().toString();
-                        productPrice =snapshot.child("price").getValue().toString();
+                        String productPrice=snapshot.child("price").getValue().toString();
                         String productCategory=snapshot.child("category").getValue().toString();
                         productImage=snapshot.child("image").getValue().toString();
                         prodModel=snapshot.child("model").getValue().toString();
-
-
 
                         Picasso.with(context).load(productImage).into(prodImage);
                         prodName.setText(productName);
@@ -127,7 +123,7 @@ public class PurchaseActivity extends AppCompatActivity {
                 favMap.put("model",prodModel);
                 favMap.put("image",productImage);
                 favMap.put("category",prodCategory.toString());
-                favMap.put("price", productPrice);
+                favMap.put("price", prodPrice.getText().toString());
                 //fvrtBtn.setImageResource(R.drawable.ic_favorite_red_24dp);
 
                 final DatabaseReference favRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User List").child(userID)
@@ -158,7 +154,7 @@ public class PurchaseActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentDate.format(callForDate.getTime());
 
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart");
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
         //Hash map to add values in "Products in Cart List"
         final HashMap<String, Object> cartMap = new HashMap<>();
@@ -172,14 +168,13 @@ public class PurchaseActivity extends AppCompatActivity {
 
         userID = user.getUid();
 
-        cartListRef.child(userID).child("Products").child(prodId)
+        cartListRef.child("User Cart").child(userID).child("Products").child(prodId)
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Item has been added to cart", Toast.LENGTH_SHORT).show();
-
                         }
                         else {
                             Toast.makeText(context, "Failed to add item", Toast.LENGTH_SHORT).show();

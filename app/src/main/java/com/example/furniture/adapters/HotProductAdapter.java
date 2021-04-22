@@ -82,7 +82,7 @@ public class HotProductAdapter extends FirebaseRecyclerAdapter<Products,HotProdu
                 favMap.put("price", model.getPrice());
                 user= FirebaseAuth.getInstance().getCurrentUser();
                 userID = user.getUid();
-                //holder.fvrtBtn.setImageResource(R.drawable.ic_favorite_red_24dp);
+                holder.fvrtBtn.setImageResource(R.drawable.ic_favorite_red_24dp);
 
 
                 favRef.child("User List").child(userID).child("Products").child(prodId)
