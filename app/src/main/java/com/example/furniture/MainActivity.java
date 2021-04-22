@@ -1,13 +1,10 @@
 package com.example.furniture;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,8 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.jar.Manifest;
-
 public class MainActivity extends AppCompatActivity {
     private Button loginBtn ;
     private EditText loginEmail,loginPassword;
@@ -43,14 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         mAuth= FirebaseAuth.getInstance();
 
@@ -96,26 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-//    //handle result of runtime permission
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch ( requestCode){
-//            case PERMISSION_CODE:{
-//                if (grantResults.length >0 && grantResults[0]== getPackageManager().PERMISSION_GRANTED){
-//                    //PERMISSION WAS GRANTED
-//                    pickImageFromGallery();
-//                }
-//                else{
-//                    //permission was denied
-//                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//    }
-    //handle result of picked image
-
 
     private void LoginUser() {
         String email = loginEmail.getText().toString().trim();
