@@ -39,14 +39,14 @@ public class AddProductActivity extends AppCompatActivity  {
     private String category,CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
     private Button AddNewProductButton;
     private ImageView InputProductImage;
-    private EditText InputProductName, InputProductCategory, InputProductPrice;
+    private EditText InputProductName, InputProductCateogyr, InputProductPrice;
     private static final int GalleryPick = 1;
     private Uri filePath;
     private String productRandomKey, downloadImageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
-    private Button uploadFile,uploadBtn, chooseBtn;
+    private Button uploadBtn,uploadFile, chooseBtn;
     private static final int IMAGE_PICK_CODE =1000;
     private static final int PERMISSION_CODE =1001;
     private Uri imageUri ;
@@ -55,7 +55,7 @@ public class AddProductActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         mImageView = findViewById(R.id.image_view);
-        uploadFile = findViewById(R.id.choose_btn);
+        //uploadFile = findViewById(R.id.choose_btn);
         uploadBtn = findViewById(R.id.upload_btn);
         //VIEWS
         //handle button click
@@ -76,7 +76,7 @@ public class AddProductActivity extends AppCompatActivity  {
         AddNewProductButton = findViewById(R.id.choose_image_btn);
         InputProductImage = findViewById(R.id.image_view);
         InputProductName = findViewById(R.id.add_product_name);
-        InputProductCategory = findViewById(R.id.add_product_category);
+        InputProductCateogyr = findViewById(R.id.add_product_category);
         InputProductPrice = findViewById(R.id.add_product_price);
         loadingBar = new ProgressDialog(this);
 
@@ -146,7 +146,7 @@ public class AddProductActivity extends AppCompatActivity  {
     }*/
 
     private void ValidateProductData() {
-        category = InputProductCategory.getText().toString();
+        category = InputProductCateogyr.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
 
@@ -255,12 +255,12 @@ public class AddProductActivity extends AppCompatActivity  {
                     }
                 });
     }
-/*private void ShowFile () {
+private void ShowFile () {
     Intent intent = new Intent();
     intent.setType("file/*");
     intent.setAction(Intent.ACTION_GET_CONTENT);
     startActivityForResult(Intent.createChooser(intent,"Select File"), GalleryPick);
-}*/
+}
 
 
 }
