@@ -39,7 +39,7 @@ public class AddProductActivity extends AppCompatActivity  {
     private String category,CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
     private Button AddNewProductButton;
     private ImageView InputProductImage;
-    private EditText InputProductName, InputProductCateogyr, InputProductPrice;
+    private EditText InputProductName, InputProductCategory, InputProductPrice;
     private static final int GalleryPick = 1;
     private Uri filePath;
     private String productRandomKey, downloadImageUrl;
@@ -76,7 +76,7 @@ public class AddProductActivity extends AppCompatActivity  {
         AddNewProductButton = findViewById(R.id.choose_image_btn);
         InputProductImage = findViewById(R.id.image_view);
         InputProductName = findViewById(R.id.add_product_name);
-        InputProductCateogyr = findViewById(R.id.add_product_category);
+        InputProductCategory = findViewById(R.id.add_product_category);
         InputProductPrice = findViewById(R.id.add_product_price);
         loadingBar = new ProgressDialog(this);
 
@@ -146,7 +146,7 @@ public class AddProductActivity extends AppCompatActivity  {
     }*/
 
     private void ValidateProductData() {
-        category = InputProductCateogyr.getText().toString();
+        category = InputProductCategory.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
 
