@@ -46,7 +46,8 @@ public class AddProductActivity extends AppCompatActivity  {
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
-    private Button uploadBtn,uploadFile, chooseBtn;
+    private Button uploadBtn;
+    private TextView uploadFile;
     private static final int IMAGE_PICK_CODE =1000;
     private static final int PERMISSION_CODE =1001;
     private Uri imageUri ;
@@ -55,7 +56,7 @@ public class AddProductActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         mImageView = findViewById(R.id.image_view);
-        //uploadFile = findViewById(R.id.choose_btn);
+        uploadFile = findViewById(R.id.choose_btn);
         uploadBtn = findViewById(R.id.upload_btn);
         //VIEWS
         //handle button click
