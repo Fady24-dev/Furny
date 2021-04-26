@@ -14,7 +14,7 @@
        android:background="#8793eb"
        android:paddingTop="24dp"
        android:backgroundTint="@color/standard"
-       app:elevation="0dp" >
+       app:elevation="0dp">
       
       <androidx.appcompat.widget.Toolbar
           android:id="@+id/toolbar_login"
@@ -203,10 +203,8 @@
                    />
             </LinearLayout>
          </LinearLayout>
-
       </ScrollView>
+
    </RelativeLayout>
-
-
 
 </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>

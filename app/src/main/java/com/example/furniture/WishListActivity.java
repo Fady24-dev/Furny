@@ -42,7 +42,7 @@ public class WishListActivity extends AppCompatActivity {
         Ref= FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User List").child(userId).child("Products");
         recyclerView = findViewById(R.id.wish_list_recycler);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
 
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
