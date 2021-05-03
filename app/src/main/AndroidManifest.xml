@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AddProductActivity"></activity>
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".CategoryActivity" />
+        <activity android:name=".CategoryActivity"
+            android:theme="@style/CartTheme"
+            android:label="Category"/>
         <activity
             android:name=".WishListActivity"
             android:label="Wishlist"

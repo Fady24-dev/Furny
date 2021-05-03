@@ -8,7 +8,6 @@
     >
 
     <Button
-        android:clickable="true"
         android:id="@+id/choose_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,9 +17,7 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/buttonshape"
         android:padding="17dp"
-
-
-        android:text="Choose File"
+        android:text="3D Model"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="18sp" />

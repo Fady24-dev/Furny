@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,8 @@ public class PurchaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_purchase);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
             previewBtn = findViewById(R.id.selected_item_preview_btn);
             fvrtBtn=findViewById(R.id.fav_purchase_btn);
             addCart = findViewById(R.id.selected_item_add_to_cart_btn);

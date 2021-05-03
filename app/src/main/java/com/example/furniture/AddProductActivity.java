@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,6 +56,7 @@ public class AddProductActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_add_product);
         mImageView = findViewById(R.id.image_view);
         uploadFile = findViewById(R.id.choose_btn);
@@ -207,6 +209,7 @@ public class AddProductActivity extends AppCompatActivity  {
 
 
 
+        //Upload 3d Model
         final UploadTask uploadFileTask = filePath.putFile(fileUri);
         uploadFileTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -219,6 +222,7 @@ public class AddProductActivity extends AppCompatActivity  {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+
                 double progress = (100.0 * snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
                 loadingBar.setMessage(new StringBuilder("Uploading: ") .append(progress).append("%"));
             }
@@ -252,7 +256,7 @@ public class AddProductActivity extends AppCompatActivity  {
             }
         });
 
-
+        //Upload Image
         final UploadTask uploadTask = fileImagePath.putFile(imageUri);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
