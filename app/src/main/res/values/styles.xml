@@ -26,8 +26,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="colorPrimaryDark">@color/standard</item>
-
-
     </style>
 
     <style name="CartTheme" parent="Theme.AppCompat.Light.DarkActionBar">

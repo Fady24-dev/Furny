@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +29,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,11 +48,11 @@ public class Profile_Activity extends AppCompatActivity {
     private TextView profileUserName;
     private EditText profileUserEmailEdit,profileUserPhoneEdit,profileUserAddressEdit,profileUserFacebookEdit;
     private ImageView profileImage;
-    private Button editButton,submitButton;
     private DatabaseReference reference;
     private FirebaseUser user;
-    private String userID;
+    private String userID, fabState;
     private StorageReference storageReference;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,42 +68,70 @@ public class Profile_Activity extends AppCompatActivity {
         userID=user.getUid();
         profileUserName=findViewById(R.id.profile_user_name);
         profileImage=findViewById(R.id.user_image);
-        editButton=findViewById(R.id.profile_edit_button);
-        submitButton=findViewById(R.id.profile_submit_button);
         profileUserEmailEdit=findViewById(R.id.profile_user_email_edit);
         profileUserPhoneEdit=findViewById(R.id.profile_user_phone_edit);
         profileUserAddressEdit=findViewById(R.id.profile_user_address_edit);
         profileUserFacebookEdit=findViewById(R.id.profile_user_facebook_edit);
+        floatingActionButton=findViewById(R.id.fab);
+        fabState = "disabled";
 
         getCurrentUserData();
 
-        editButton.setOnClickListener(new View.OnClickListener() {
+        profileUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editButton.setVisibility(View.INVISIBLE);
-                submitButton.setVisibility(View.VISIBLE);
+                AlertDialog.Builder mydialog = new AlertDialog.Builder(Profile_Activity.this);
 
-                profileUserEmailEdit.setEnabled(true);
-                profileUserPhoneEdit.setEnabled(true);
-                profileUserAddressEdit.setEnabled(true);
-                profileUserFacebookEdit.setEnabled(true);
+                final EditText nameChange = new EditText(Profile_Activity.this);
+                nameChange.setInputType(InputType.TYPE_CLASS_TEXT);
+                mydialog.setView(nameChange);
 
-                readData();
+                mydialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reference.child(userID).child("name").setValue(nameChange.getText().toString());
+                    }
+                });
+
+                mydialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                mydialog.show();
             }
         });
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profileUserEmailEdit.setEnabled(false);
-                profileUserPhoneEdit.setEnabled(false);
-                profileUserAddressEdit.setEnabled(false);
-                profileUserFacebookEdit.setEnabled(false);
 
-                editButton.setVisibility(View.VISIBLE);
-                submitButton.setVisibility(View.INVISIBLE);
+                if (fabState == "disabled"){
 
-                submitData();
+                    profileUserEmailEdit.setEnabled(true);
+                    profileUserPhoneEdit.setEnabled(true);
+                    profileUserAddressEdit.setEnabled(true);
+                    profileUserFacebookEdit.setEnabled(true);
+
+                    floatingActionButton.setImageResource(R.drawable.check_mark);
+                    fabState = "enabled";
+                }
+
+                else if(fabState == "enabled"){
+
+                    profileUserEmailEdit.setEnabled(false);
+                    profileUserPhoneEdit.setEnabled(false);
+                    profileUserAddressEdit.setEnabled(false);
+                    profileUserFacebookEdit.setEnabled(false);
+
+                    floatingActionButton.setImageResource(R.drawable.edit_pen);
+                    fabState = "disabled";
+                }
+
+                readData();
             }
         });
 

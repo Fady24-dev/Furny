@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Profile_Activity">
 
-
-
     <RelativeLayout
         android:id="@+id/rellay1"
         android:layout_width="match_parent"
@@ -223,25 +221,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:gravity="end"
             android:orientation="horizontal"
             android:weightSum="2"
             android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="10dp">
 
-            <Button
-                android:visibility="invisible"
-                android:id="@+id/profile_submit_button"
-                android:layout_width="20dp"
-                android:layout_weight="1"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit" />
-
-            <Button
-                android:id="@+id/profile_edit_button"
-                android:layout_width="20dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
+                android:clickable="true"
+                android:src="@drawable/edit_pen"
+                app:fabCustomSize="65dp"
+                android:backgroundTint="@color/gradStart"
+                android:layout_margin="16dp" />
 
         </LinearLayout>
 
