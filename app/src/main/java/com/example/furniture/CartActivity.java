@@ -161,8 +161,6 @@ public class CartActivity extends AppCompatActivity {
 
                 //priceRef =FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID);
                 //priceRef.child("Total Price").setValue(overTotalPrice);
-
-
                 holder.deleteItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

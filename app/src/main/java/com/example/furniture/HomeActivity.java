@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -56,6 +57,19 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Ref=FirebaseDatabase.getInstance().getReference("Users");
+        userID=user.getUid();
+
+        Toolbar toolbar = findViewById(R.id.toolbar_home);
+        setSupportActionBar(toolbar);
+
+        if(user.getEmail().equals("admin0000@mail.com")){
+            Toast.makeText(this, "Admin Mode", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(),AddProductActivity.class));
+            finish();
+        }
 
         searchBar=findViewById(R.id.search_bar_home);
         chairCatLayout = findViewById(R.id.chair_Cat_Selection);
@@ -115,12 +129,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        Ref=FirebaseDatabase.getInstance().getReference("Users");
-        userID=user.getUid();
 
-       Toolbar toolbar = findViewById(R.id.toolbar_home);
-       setSupportActionBar(toolbar);
 
        //Search bar Clicking enter
        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {

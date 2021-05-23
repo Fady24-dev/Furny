@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-
-
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         loadingbar.dismiss();
                         Toast.makeText(MainActivity.this, "Admin Mode", Toast.LENGTH_LONG).show();
+
                     }
                     else {
                         //user.sendEmailVerification();
@@ -150,9 +149,7 @@ public class MainActivity extends AppCompatActivity {
                          finish();
                         //Toast.makeText(MainActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
                         loadingbar.dismiss();
-
                     }
-
 
                 }
                 else
