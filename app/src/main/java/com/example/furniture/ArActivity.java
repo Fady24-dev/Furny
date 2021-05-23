@@ -3,21 +3,20 @@ package com.example.furniture;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.furniture.models.Products;
+import com.example.furniture.viewholders.ArViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.ar.core.Anchor;
@@ -50,6 +49,7 @@ public class ArActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         arFragment= (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
         progressBar=findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.GONE);
@@ -177,7 +177,7 @@ public class ArActivity extends AppCompatActivity {
                             .build();
 
 
-            FirebaseRecyclerAdapter<Products,ArViewHolder> adapter= new FirebaseRecyclerAdapter<Products, ArViewHolder>(options) {
+            FirebaseRecyclerAdapter<Products, ArViewHolder> adapter= new FirebaseRecyclerAdapter<Products, ArViewHolder>(options) {
                 @Override
                 protected void onBindViewHolder(@NonNull ArViewHolder holder, int position, @NonNull Products model) {
                     user = FirebaseAuth.getInstance().getCurrentUser();
@@ -220,7 +220,6 @@ public class ArActivity extends AppCompatActivity {
 
                                 }
                             });
-
 
                         }
                     });

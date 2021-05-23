@@ -57,7 +57,10 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.3'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    //elegant-number
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.3'
+    //Settings
+    implementation 'com.github.kenumir:MaterialSettings:v.1.2.2'
 
 
 }

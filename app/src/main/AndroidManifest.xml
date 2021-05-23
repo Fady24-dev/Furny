@@ -16,20 +16,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".CategoryActivity"></activity>
-
-        <activity android:name=".WishListActivity"
-            android:label="Wishlist"
+        <activity android:name=".AddProductActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".CategoryActivity"
             android:theme="@style/CartTheme"
-            >
-
-        </activity>
-
+            android:label="Category"/>
+        <activity
+            android:name=".WishListActivity"
+            android:label="Wishlist"
+            android:theme="@style/CartTheme" />
         <activity
             android:name=".CartActivity"
             android:label="Cart"
-            android:theme="@style/CartTheme"></activity>
+            android:theme="@style/CartTheme" />
         <activity android:name=".SearchActivity" />
         <activity
             android:name=".DrawerActivity"

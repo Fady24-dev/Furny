@@ -84,8 +84,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -123,8 +121,8 @@
                             <LinearLayout
                                 android:clickable="true"
                                 android:id="@+id/closet_Cat_Selection"
-                                android:layout_width="106dp"
-                                android:layout_height="wrap_content"
+                                android:layout_width="90dp"
+                                android:layout_height="70dp"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -152,9 +150,7 @@
                                         android:layout_alignParentEnd="true"
                                         android:src="@drawable/ic_arrow_forward_black_24dp" />
                                 </RelativeLayout>
-
                             </LinearLayout>
-
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
@@ -168,8 +164,8 @@
 
                             <LinearLayout
                                 android:id="@+id/Sofa_Cat_Selection"
-                                android:layout_width="106dp"
-                                android:layout_height="wrap_content"
+                                android:layout_width="90dp"
+                                android:layout_height="70dp"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -213,8 +209,8 @@
 
                             <LinearLayout
                                 android:id="@+id/Bed_Cat_Selection"
-                                android:layout_width="106dp"
-                                android:layout_height="wrap_content"
+                                android:layout_width="90dp"
+                                android:layout_height="70dp"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -258,8 +254,8 @@
 
                             <LinearLayout
                                 android:id="@+id/Office_Cat_Selection"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
+                                android:layout_width="90dp"
+                                android:layout_height="70dp"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -304,8 +300,8 @@
                             <LinearLayout
                                 android:clickable="true"
                                 android:id="@+id/chair_Cat_Selection"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
+                                android:layout_width="90dp"
+                                android:layout_height="70dp"
                                 android:orientation="vertical">
 
                                 <ImageView

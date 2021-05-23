@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -46,9 +48,6 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseUser user;
     private String userID,searchInput;
     private EditText searchBar;
-    private ImageView chairsCategory,sofaHotItem,profileBtn;
-    private FloatingActionButton floatingActionButton;
-    private int numberOfColumns = 2;
     private LinearLayout chairCatLayout,bedLayout,sofaLayout,closetLayout,officeLayout;
 
 
@@ -57,6 +56,21 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_home);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Ref=FirebaseDatabase.getInstance().getReference("Users");
+        userID=user.getUid();
+
+        Toolbar toolbar = findViewById(R.id.toolbar_home);
+        setSupportActionBar(toolbar);
+
+        if(user.getEmail().equals("admin0000@mail.com")){
+            Toast.makeText(this, "Admin Mode", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(),AddProductActivity.class));
+            finish();
+        }
+
         searchBar=findViewById(R.id.search_bar_home);
         chairCatLayout = findViewById(R.id.chair_Cat_Selection);
         bedLayout = findViewById(R.id.Bed_Cat_Selection);
@@ -115,16 +129,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        Ref=FirebaseDatabase.getInstance().getReference("Users");
-        userID=user.getUid();
-
-
-
-
-       Toolbar toolbar = findViewById(R.id.toolbar_home);
-       setSupportActionBar(toolbar);
-
 
 
        //Search bar Clicking enter
@@ -170,6 +174,19 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.wish_list_drawer:
                         startActivity(new Intent(getApplicationContext(),WishListActivity.class));
                         break;
+                    case R.id.orders_drawer:
+                        startActivity(new Intent(getApplicationContext(),AddProductActivity.class));
+                        break;
+                    case R.id.share_drawer:
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        String shareBody="New Release VR Shopping,TRY IT NOW:"+"\n https://web.facebook.com/Fady.RR24/";
+                        String shareSub="Furniture App,Share now!";
+                        intent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+                        intent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                        startActivity(Intent.createChooser(intent,"Share Using"));
+
+                        break;
 
                 }
                 drawer.closeDrawer((GravityCompat.START));
@@ -186,6 +203,13 @@ public class HomeActivity extends AppCompatActivity {
         TextView userNameTextView = headerView.findViewById(R.id.user_name_profile_drawer);
         TextView userEmailTextView = headerView.findViewById(R.id.email_user_drawer);
         ImageView profileImageView = headerView.findViewById(R.id.header_profile_image_drawer);
+
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
+            }
+        });
 
         Ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
