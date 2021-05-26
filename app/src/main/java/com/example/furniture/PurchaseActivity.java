@@ -181,7 +181,7 @@ public class PurchaseActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Item has been added to cart", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Added To Cart", Toast.LENGTH_SHORT).show();
 
                         }
                         else {

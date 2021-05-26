@@ -60,35 +60,24 @@
                     android:background="@color/standard"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:fontFamily="@font/calibri"
-                        android:text="Your Future"
-                        android:textAlignment="center"
-                        android:textColor="#FFFFFF"
-                        android:textSize="22sp" />
+
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/calibri"
-                        android:text="Furniture"
-                        android:textStyle="bold"
+                        android:text="Welcome!"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
-                        android:textSize="36sp" />
+                        android:textSize="25sp" />
 
                     <View
                         android:layout_width="80dp"
                         android:layout_height="4dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
-                        android:background="#ffc6c6"
-                        />
+                        android:background="#ec5b3c" />
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
@@ -98,7 +87,7 @@
                     android:layout_marginTop="-90dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="2dp"
-                    app:cardCornerRadius="8dp"
+                    app:cardCornerRadius="40dp"
                     app:cardElevation="4dp"
                     app:cardUseCompatPadding="true"
                     app:contentPadding="3dp">
@@ -114,11 +103,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="36dp"
                             android:layout_marginBottom="24dp"
-                            android:fontFamily="@font/calibri"
-                            android:text="Sign Up"
+                            android:text="Create Account"
+                            android:textStyle=""
                             android:textAlignment="center"
-                            android:textColor="@color/grey"
-                            android:textSize="24sp" />
+                            android:textColor="#3c3d6b"
+                            android:textSize="20sp" />
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -193,17 +182,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="16dp"
-                    android:background="@drawable/buttonshape"
-                    android:fontFamily="@font/calibri"
-                    android:text="Sign Up"
+                    android:background="@drawable/round_bg"
+                    android:text="Create"
                     android:textAllCaps="false"
                     android:textColor="#ffffff"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
 
             </LinearLayout>
 
-
+            android:id="@+id/sign_up_btn"
         </ScrollView>
 
     </RelativeLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#688ae2</color>
+    <color name="colorPrimary">#6c6d91 </color>
     <color name="colorPrimaryDark">#688ae2</color>
     <color name="colorAccent">#ffc6c6</color>
 
@@ -12,7 +12,7 @@
     <color name="gradEnd">#67EFC8</color>
     <color name="gradStart">#63C9FF</color>
     <color name="light">#65DCE5</color>
-    <color name="standard">#49BEFF</color>
+    <color name="standard">#6c6d91 </color>
     <color name="grey">#8B8B8B</color>
     <color name="lightgrey">#E5E5E5</color>
     <color name="colorTitle">#232323</color>

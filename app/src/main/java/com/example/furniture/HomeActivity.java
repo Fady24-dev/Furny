@@ -175,7 +175,6 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),WishListActivity.class));
                         break;
                     case R.id.orders_drawer:
-                        startActivity(new Intent(getApplicationContext(),AddProductActivity.class));
                         break;
                     case R.id.share_drawer:
                         Intent intent = new Intent(Intent.ACTION_SEND);

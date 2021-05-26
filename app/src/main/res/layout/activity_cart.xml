@@ -121,7 +121,7 @@
                     android:layout_height="40dp"
                     android:text="Payment"
                     android:textColor="#FFF"
-                    android:background="@drawable/circularbutton"
+                    android:background="@drawable/round_bg"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="25dp"
                     />
@@ -132,7 +132,7 @@
                     android:layout_height="40dp"
                     android:text="Preview"
                     android:textColor="#FFF"
-                    android:background="@drawable/circularbutton"
+                    android:background="@drawable/round_bg"
                     android:layout_alignParentLeft="true"
                     android:layout_marginTop="25dp"
                     />

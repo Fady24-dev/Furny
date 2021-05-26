@@ -22,7 +22,7 @@
             app:civ_border_color="@color/white"
             app:civ_border_width="1dp"
             app:civ_shadow="true"
-            app:civ_shadow_radius="4dp"
+            app:civ_shadow_radius="5dp"
             app:civ_shadow_color="@color/grey"
             android:src="@drawable/my_account_icon"/>
 
@@ -235,7 +235,7 @@
                 android:clickable="true"
                 android:src="@drawable/edit_pen"
                 app:fabCustomSize="65dp"
-                android:backgroundTint="@color/gradStart"
+                android:backgroundTint="@color/standard"
                 android:layout_margin="16dp" />
 
         </LinearLayout>
