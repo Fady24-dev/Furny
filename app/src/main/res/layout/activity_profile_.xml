@@ -47,7 +47,7 @@
             android:fontFamily="sans-serif"
             android:text="Cairo, Egypt"
             android:textAllCaps="true"
-            android:textColor="@color/address"
+            android:textColor="#ec5b3c"
             android:textSize="14sp" />
 
     </RelativeLayout>
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/calibri"
                     android:text="Email"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Phone"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Address"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -189,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Facebook"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -236,6 +236,7 @@
                 android:src="@drawable/edit_pen"
                 app:fabCustomSize="65dp"
                 android:backgroundTint="@color/standard"
+                app:rippleColor="#ec5b3c"
                 android:layout_margin="16dp" />
 
         </LinearLayout>

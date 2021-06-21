@@ -41,7 +41,7 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Products,WishListAd
 
         prodID=getRef(position).getKey();
 
-        holder.pName.setText(model.getName());
+        //holder.pName.setText(model.getName());
         //holder.pPrice.setText("$"+model.getPrice());
         Picasso.with(context).load(model.getImage()).into(holder.pImage);
 
@@ -73,7 +73,7 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Products,WishListAd
         View v;
         public wishListViewHolder(@NonNull View itemView) {
             super(itemView);
-            pName=itemView.findViewById(R.id.wish_list__prodName);
+            //pName=itemView.findViewById(R.id.wish_list__prodName);
             //pPrice=itemView.findViewById(R.id.wish_list__prodPrice);
             pImage = itemView.findViewById(R.id.wish_list_prodImage);
             v=itemView;
