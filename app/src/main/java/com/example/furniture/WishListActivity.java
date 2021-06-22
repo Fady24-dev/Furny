@@ -7,10 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.furniture.adapters.HotProductAdapter;
 import com.example.furniture.adapters.WishListAdapter;
@@ -28,6 +33,7 @@ public class WishListActivity extends AppCompatActivity {
     private String userId;
     private FirebaseUser user;
     private WishListAdapter wishListAdapter;
+    private RelativeLayout emptyLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,33 +41,48 @@ public class WishListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wish_list);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        RelativeLayout emptyLayout = (RelativeLayout) findViewById(R.id.empty_layout);
+
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
+
         user= FirebaseAuth.getInstance().getCurrentUser();
-        userId=user.getUid();
-        //Firebase RecyclerView
-        Ref= FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User List").child(userId).child("Products");
-        recyclerView = findViewById(R.id.wish_list_recycler);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        //USER MODE
+        if(user != null){
+            userId=user.getUid();
+            //Firebase RecyclerView
+            Ref= FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User List").child(userId).child("Products");
+            recyclerView = findViewById(R.id.wish_list_recycler);
 
-        // query in the database to fetch appropriate data
-        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(Ref,Products.class)
-                .build();
+            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            );
 
-        // Connecting object of required Adapter class to
-        wishListAdapter = new WishListAdapter(options);
-        recyclerView.setAdapter(wishListAdapter);
+            // query in the database to fetch appropriate data
+            FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                    .setQuery(Ref,Products.class)
+                    .build();
+
+
+            // Connecting object of required Adapter class to
+            wishListAdapter = new WishListAdapter(options);
+                recyclerView.setAdapter(wishListAdapter);
+                wishListAdapter.startListening();
+
+        }
+        //GUEST MODE
+        else {
+            emptyLayout.setVisibility(View.VISIBLE);        }
+;
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        wishListAdapter.startListening();
-
     }
 
     @Override

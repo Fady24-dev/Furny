@@ -148,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     else {
                                         Toast.makeText(RegisterActivity.this, ""+task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                         loadingbar.dismiss();
-                                        Log.d("moshkla",""+task.getException());
+                                        Log.d("Problem",""+task.getException());
                                     }
                                 }
                             });

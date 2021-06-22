@@ -120,6 +120,8 @@ public class Profile_Activity extends AppCompatActivity {
 
                     floatingActionButton.setImageResource(R.drawable.check_mark);
                     fabState = "enabled";
+                    readData();
+
                 }
 
                 else if(fabState == "enabled"){
@@ -131,9 +133,11 @@ public class Profile_Activity extends AppCompatActivity {
 
                     floatingActionButton.setImageResource(R.drawable.edit_pen);
                     fabState = "disabled";
+                    submitData();
+
                 }
 
-                readData();
+
             }
         });
 
@@ -177,8 +181,7 @@ public class Profile_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists())
                 {
-                    Users user = new Users();
-                    user = snapshot.getValue(Users.class);
+                 Users user = snapshot.getValue(Users.class);
 
                     profileUserEmailEdit.setText(user.getEmail());
                     profileUserPhoneEdit.setText(user.getPhone());
@@ -202,7 +205,6 @@ public class Profile_Activity extends AppCompatActivity {
         profileMap.put("facebook",profileUserFacebookEdit.getText().toString());
 
         reference.child(userID).updateChildren(profileMap);
-
         getCurrentUserData();
     }
 
