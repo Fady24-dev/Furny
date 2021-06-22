@@ -34,7 +34,7 @@
             android:layout_below="@+id/user_image"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-light"
-            android:text="User Name"
+            android:text="Welcome"
             android:textColor="@color/white"
             android:textSize="32sp" />
 

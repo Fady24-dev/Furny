@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WishListAdapter extends FirebaseRecyclerAdapter<Products,WishListAdapter.wishListViewHolder> {
 
     private Context context;
@@ -83,4 +86,6 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Products,WishListAd
 
         }
     }
+
+
 }

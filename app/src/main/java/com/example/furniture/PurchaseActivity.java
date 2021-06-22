@@ -64,9 +64,8 @@ public class PurchaseActivity extends AppCompatActivity {
             prodCategory = findViewById(R.id.selected_item_category);
             prodImage = findViewById(R.id.selected_item_image);
 
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            userID=user.getUid();
-            context=this;
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        context=this;
             prodId = getIntent().getStringExtra("pid");
 
 
@@ -115,40 +114,49 @@ public class PurchaseActivity extends AppCompatActivity {
             addCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    addToCart();
+                    if(user != null){
+                        addToCart();
+                    }
+                    else {
+                        Toast.makeText(context, "Log in first!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
-        fvrtBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final HashMap<String, Object> favMap = new HashMap<>();
-                favMap.put("pid",prodId);
-                favMap.put("name",prodName.getText().toString());
-                favMap.put("model",prodModel);
-                favMap.put("image",productImage);
-                favMap.put("category",prodCategory.toString());
-                favMap.put("price", productPrice);
-                //fvrtBtn.setImageResource(R.drawable.ic_favorite_red_24dp);
-
-                final DatabaseReference favRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User List").child(userID)
-                        .child("Products");
-                favRef.child(prodId).updateChildren(favMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            if(user != null){
+                userID=user.getUid();
+                fvrtBtn.setVisibility(View.VISIBLE);
+                fvrtBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(context, "Added To Wishlist", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    public void onClick(View v) {
 
-                        }
+                        final HashMap<String, Object> favMap = new HashMap<>();
+                        favMap.put("pid",prodId);
+                        favMap.put("name",prodName.getText().toString());
+                        favMap.put("model",prodModel);
+                        favMap.put("image",productImage);
+                        favMap.put("category",prodCategory.toString());
+                        favMap.put("price", productPrice);
+                        //fvrtBtn.setImageResource(R.drawable.ic_favorite_red_24dp);
+
+                        final DatabaseReference favRef = FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User List").child(userID)
+                                .child("Products");
+                        favRef.child(prodId).updateChildren(favMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(context, "Added To Wishlist", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
                     }
                 });
             }
-        });
+
     }
 
     private void addToCart() {

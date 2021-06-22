@@ -9,6 +9,20 @@
 
 
 
+        <RelativeLayout
+            android:id="@+id/empty_layout"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <include
+                layout="@layout/empty_wishlist" />
+        </RelativeLayout>
+
+
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wish_list_recycler"
