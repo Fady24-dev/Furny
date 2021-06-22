@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6c6d91 </color>
+    <color name="colorPrimary">#de9d23 </color>
     <color name="colorPrimaryDark">#688ae2</color>
     <color name="colorAccent">#ffc6c6</color>
 
@@ -9,13 +9,15 @@
     <color name="headings">#3797CF</color>
     <color name="solidCircle">#AAFFFFFF</color>
     <color name="circleBorder">#50FFFFFF</color>
-    <color name="gradEnd">#67EFC8</color>
-    <color name="gradStart">#63C9FF</color>
+    <color name="gradEnd">#ffe3a6</color>
+    <color name="gradStart">#ffcb3d</color>
     <color name="light">#65DCE5</color>
-    <color name="standard">#6c6d91 </color>
+    <color name="standard">#ffcb3d </color>
     <color name="grey">#8B8B8B</color>
     <color name="lightgrey">#E5E5E5</color>
     <color name="colorTitle">#232323</color>
+    <color name="gradient">#ffe3a6</color>
+    <color name="callToAction">#ff8717</color>
 
 
     <color name="white">#FFFFFF</color>
