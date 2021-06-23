@@ -29,6 +29,7 @@
         android:textSize="18sp"
         android:fontFamily="sans-serif-light"
         android:textStyle="bold"
+        android:textColor="#FFF"
         android:text="Welcome"
         android:layout_below="@id/header_profile_image_drawer"/>
 
@@ -48,17 +49,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:fontFamily="sans-serif-thin"
         android:text="Log in/Sign Up"
         android:textSize="12sp"
         android:textStyle="bold"
         android:layout_below="@id/user_name_profile_drawer"/>
 
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="@drawable/wave"
-    />
+
 
 </RelativeLayout>

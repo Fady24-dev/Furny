@@ -55,6 +55,7 @@ public class ArActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
 
+        prodId =getIntent().getStringExtra("pid");
 
         activity = getIntent().getStringExtra("activity");
         if(activity==null){
@@ -63,15 +64,17 @@ public class ArActivity extends AppCompatActivity {
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        userID = user.getUid();
+        if(user != null){
+            userID = user.getUid();
+            //Firebase RecyclerView
+            Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
 
-        prodId =getIntent().getStringExtra("pid");
+            recyclerView = findViewById(R.id.ar_recycler);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
-        //Firebase RecyclerView
-        Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
+        }
 
-        recyclerView = findViewById(R.id.ar_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
 
 
 
@@ -168,74 +171,76 @@ public class ArActivity extends AppCompatActivity {
             });
         }
 
+        //To Preview Multiple Item From Cart activity
         else {
-            //To Preview Multiple Item From Purchase activity
+            if(user != null){
+                FirebaseRecyclerOptions<Products> options =
+                        new FirebaseRecyclerOptions.Builder<Products>()
+                                .setQuery(Ref,Products.class)
+                                .build();
 
-            FirebaseRecyclerOptions<Products> options =
-                    new FirebaseRecyclerOptions.Builder<Products>()
-                            .setQuery(Ref,Products.class)
-                            .build();
 
+                FirebaseRecyclerAdapter<Products, ArViewHolder> adapter= new FirebaseRecyclerAdapter<Products, ArViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull ArViewHolder holder, int position, @NonNull Products model) {
+                        user = FirebaseAuth.getInstance().getCurrentUser();
+                        userID = user.getUid();
 
-            FirebaseRecyclerAdapter<Products, ArViewHolder> adapter= new FirebaseRecyclerAdapter<Products, ArViewHolder>(options) {
-                @Override
-                protected void onBindViewHolder(@NonNull ArViewHolder holder, int position, @NonNull Products model) {
-                    user = FirebaseAuth.getInstance().getCurrentUser();
-                    userID = user.getUid();
+                        Picasso.with(getApplicationContext()).load(model.getImage()).into(holder.prodImage);
 
-                    Picasso.with(getApplicationContext()).load(model.getImage()).into(holder.prodImage);
+                        holder.prodImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                prodID =getRef(holder.getAdapterPosition()).getKey();
+                                Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
 
-                    holder.prodImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            prodID =getRef(holder.getAdapterPosition()).getKey();
-                            Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
+                                Ref.child(prodID).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            Ref.child(prodID).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if(snapshot.exists()){
+                                            String productModel = snapshot.child("model").getValue().toString();
+                                            arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                                                Anchor anchor = hitResult.createAnchor();
+                                                progressBar.setVisibility(View.VISIBLE);
 
-                                    if(snapshot.exists()){
-                                        String productModel = snapshot.child("model").getValue().toString();
-                                        arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
-                                            Anchor anchor = hitResult.createAnchor();
-                                            progressBar.setVisibility(View.VISIBLE);
-
-                                            ModelRenderable.builder()
-                                                    .setSource(getApplicationContext(), Uri.parse(productModel))
-                                                    .build()
-                                                    .thenAccept(modelRenderable -> addModelToScene(anchor,modelRenderable))
-                                                    .exceptionally(throwable -> {
-                                                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                                                        builder.setMessage(throwable.getMessage())
-                                                                .show();
-                                                        return null;
-                                                    });
-                                        });
+                                                ModelRenderable.builder()
+                                                        .setSource(getApplicationContext(), Uri.parse(productModel))
+                                                        .build()
+                                                        .thenAccept(modelRenderable -> addModelToScene(anchor,modelRenderable))
+                                                        .exceptionally(throwable -> {
+                                                            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                                            builder.setMessage(throwable.getMessage())
+                                                                    .show();
+                                                            return null;
+                                                        });
+                                            });
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
+                                    }
+                                });
 
-                        }
-                    });
+                            }
+                        });
 
-                }
+                    }
 
-                @NonNull
-                @Override
-                public ArViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ar_item,parent,false);
-                    ArViewHolder holder = new ArViewHolder(view);
-                    return holder;
-                }
-            };
-            recyclerView.setAdapter(adapter);
-            adapter.startListening();
+                    @NonNull
+                    @Override
+                    public ArViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ar_item,parent,false);
+                        ArViewHolder holder = new ArViewHolder(view);
+                        return holder;
+                    }
+                };
+                recyclerView.setAdapter(adapter);
+                adapter.startListening();
+            }
+
         }
 
     }

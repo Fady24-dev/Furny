@@ -158,6 +158,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //Nav Drawer
+        //User MODE
         DrawerLayout drawer = findViewById(R.id.drawer_layout1);
         NavigationView navigationView = findViewById(R.id.nav_view1);
        if(user !=null){
@@ -172,7 +173,8 @@ public class HomeActivity extends AppCompatActivity {
                            break;
                        case R.id.log_out_drawer:
                            FirebaseAuth.getInstance().signOut();
-                           startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                           startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                           Toast.makeText(HomeActivity.this, "Logged Out Successfully.", Toast.LENGTH_SHORT).show();
                            finish();
                            break;
                        case R.id.cart_drawer:
