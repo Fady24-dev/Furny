@@ -29,6 +29,8 @@
 
         <TextView
             android:id="@+id/profile_user_name"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_image"
@@ -49,6 +51,18 @@
             android:textAllCaps="true"
             android:textColor="#ec5b3c"
             android:textSize="14sp" />
+        <!--
+        <TextView
+            android:id="@+id/signin_signup_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_user_name"
+            android:layout_centerHorizontal="true"
+            android:text="Log in/Sign Up"
+            android:textStyle="bold"
+            android:textColor="#ec5b3c"
+            android:textSize="14sp" /> -->
+
 
     </RelativeLayout>
 

@@ -27,7 +27,7 @@
 
         <item
             android:id="@+id/orders_drawer"
-            android:icon="@drawable/fav_icon"
+            android:icon="@drawable/ic_assignment_black_24dp"
             android:title="My Orders"
             app:showAsAction="always"/>
 
