@@ -74,7 +74,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/calibri"
                             android:text="$130"
-                            android:textColor="#ec5b3c"
+                            android:textColor="@color/callToAction"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>

@@ -233,9 +233,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:src="@drawable/edit_pen"
+                android:src="@drawable/edit_pen_white"
                 app:fabCustomSize="65dp"
-                android:backgroundTint="@color/standard"
+                android:backgroundTint="@color/colorPrimary"
                 app:rippleColor="#ec5b3c"
                 android:layout_margin="16dp" />
 
