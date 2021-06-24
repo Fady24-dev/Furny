@@ -102,7 +102,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.8dp"
         android:layout_gravity="center"
         android:background="@color/lightgrey"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +121,7 @@
         android:padding="16dp"
         android:text="Snuggle up, feel warmly embraced and enjoy cosy nights and lazy days. This sofa is extra deep, has soft and moveable back cushions, and comes in various sizes and shapes – everything for your comfort."
         android:textColor="@color/grey"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/selected_item_preview_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
