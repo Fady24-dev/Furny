@@ -118,7 +118,7 @@ public class Profile_Activity extends AppCompatActivity {
                     profileUserAddressEdit.setEnabled(true);
                     profileUserFacebookEdit.setEnabled(true);
 
-                    floatingActionButton.setImageResource(R.drawable.check_mark);
+                    floatingActionButton.setImageResource(R.drawable.check_mark_white);
                     fabState = "enabled";
                     readData();
 
@@ -131,7 +131,7 @@ public class Profile_Activity extends AppCompatActivity {
                     profileUserAddressEdit.setEnabled(false);
                     profileUserFacebookEdit.setEnabled(false);
 
-                    floatingActionButton.setImageResource(R.drawable.edit_pen);
+                    floatingActionButton.setImageResource(R.drawable.edit_pen_white);
                     fabState = "disabled";
                     submitData();
 

@@ -25,7 +25,8 @@
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/topView" />
 
-   <ImageView
+
+        <ImageView
        android:id="@+id/imageView5"
        android:layout_width="150dp"
        android:layout_height="100dp"
@@ -38,6 +39,35 @@
        app:srcCompat="@drawable/newlogo" />
 
 
+       <TextView
+       android:id="@+id/company_name_txt"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/rogue"
+       android:text="Furny"
+       android:textColor="#ec5b3c"
+       android:textSize="32sp"
+       android:textStyle="bold"
+       app:layout_constraintBottom_toBottomOf="@+id/view5"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/imageView5"
+       app:layout_constraintVertical_bias="0.0" />
+
+   <TextView
+       android:id="@+id/solgan_company_txt"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/rogue"
+       android:text="Real Experience"
+       android:textColor="#3c3d6b"
+       android:textStyle="bold"
+       android:textSize="22sp"
+       app:layout_constraintBottom_toBottomOf="@+id/view5"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/topView"
+       app:layout_constraintVertical_bias="0.0" />
 
 
    <EditText
@@ -45,6 +75,7 @@
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        android:layout_marginStart="32dp"
+       android:layout_marginTop="300dp"
        android:layout_marginEnd="32dp"
        android:background="@drawable/round_border"
        android:drawableStart="@drawable/ic_email"
@@ -54,9 +85,9 @@
        android:inputType="textEmailAddress"
        android:padding="16dp"
        app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="1.0"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/view5"
-       />
+       app:layout_constraintTop_toTopOf="parent" />
 
    <EditText
        android:id="@+id/password_input_login"
@@ -152,34 +183,6 @@
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-   <TextView
-       android:id="@+id/company_name_txt"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:fontFamily="@font/rogue"
-       android:text="Furny"
-       android:textColor="#ec5b3c"
-       android:textSize="32sp"
-       android:textStyle="bold"
-       app:layout_constraintBottom_toBottomOf="@+id/view5"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/imageView5"
-       app:layout_constraintVertical_bias="0.0" />
 
-   <TextView
-       android:id="@+id/solgan_company_txt"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:fontFamily="@font/rogue"
-       android:text="Real Experience"
-       android:textColor="#3c3d6b"
-       android:textStyle="bold"
-       android:textSize="22sp"
-       app:layout_constraintBottom_toBottomOf="@+id/view5"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/topView"
-       app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
