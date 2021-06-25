@@ -37,7 +37,7 @@ public class CartActivity extends AppCompatActivity {
     DatabaseReference Ref,priceRef;
     RecyclerView recyclerView;
     private FirebaseUser user;
-    private Button previewBtn;
+    private Button previewBtn, paymentbtn;
     private TextView totalPrice,emptyTxt;
     private String prodID,elegantCounter;
     private int overTotalPrice,quantity;
@@ -56,6 +56,7 @@ public class CartActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         previewBtn=findViewById(R.id.preview_allcart_btn);
+        paymentbtn=findViewById(R.id.payment_btn);
         totalPrice=findViewById(R.id.total_cart_price);
         emptyTxt=findViewById(R.id.empty_recycler_cart);
 
@@ -71,8 +72,19 @@ public class CartActivity extends AppCompatActivity {
 
         totalPrice.setText(String.valueOf(overTotalPrice));
         quantity=1;
-
-
+        /* if (recyclerView == null) {
+            paymentbtn.setEnabled(true);*/
+        paymentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),PaymentActivity.class);
+                startActivity(intent);
+            }
+        });
+        /*   } else {
+            paymentbtn.setEnabled(false);
+        }
+*/
         previewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,11 +171,11 @@ public class CartActivity extends AppCompatActivity {
                 holder.txt_poduct_id.setText(model.getPid());
 
                 // to count the total price in cart
-                    int oneProductPrice = Integer.parseInt(model.getPrice());
-                    //int oneProductQuantity = Integer.parseInt(holder.countButton.getNumber());
-                    int oneTyprProductTPrice = oneProductPrice*quantity;
-                    overTotalPrice = overTotalPrice + oneTyprProductTPrice;
-                    totalPrice.setText("$"+String.valueOf(overTotalPrice));
+                int oneProductPrice = Integer.parseInt(model.getPrice());
+                //int oneProductQuantity = Integer.parseInt(holder.countButton.getNumber());
+                int oneTyprProductTPrice = oneProductPrice*quantity;
+                overTotalPrice = overTotalPrice + oneTyprProductTPrice;
+                totalPrice.setText("$"+String.valueOf(overTotalPrice));
 
 
 
