@@ -185,8 +185,7 @@ public class CartActivity extends AppCompatActivity {
                     {
                         int price = Integer.parseInt(entry.getValue().getPrice());
                         sum += price;
-                        totalPrice.setText(String.valueOf(sum));
-                        Toast.makeText(CartActivity.this, ""+sum, Toast.LENGTH_SHORT).show();
+                        totalPrice.setText("$"+String.valueOf(sum));
 
                     }
                 }

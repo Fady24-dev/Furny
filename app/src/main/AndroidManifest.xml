@@ -24,8 +24,9 @@
         <activity android:name=".AdminViewActivity"></activity>
 
 
-        <activity android:name=".AddProductActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".AddProductActivity"
+            android:label="Add Product"
+            android:theme="@style/CartTheme"/>
         <activity
             android:name=".CategoryActivity"
             android:label="Category"

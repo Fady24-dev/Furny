@@ -69,8 +69,7 @@ public class WishListActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
                         emptyLayout.setVisibility(View.INVISIBLE);
-                        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-
+                        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2 ));
                         // query in the database to fetch appropriate data
                         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                                 .setQuery(Ref,Products.class)
