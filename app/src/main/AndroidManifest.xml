@@ -20,6 +20,10 @@
             android:name=".PaymentActivity"
             android:label="Payment"
             android:theme="@style/CartTheme"></activity>
+
+        <activity android:name=".AdminViewActivity"></activity>
+
+
         <activity android:name=".AddProductActivity" />
         <activity android:name=".SettingsActivity" />
         <activity

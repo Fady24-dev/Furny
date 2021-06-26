@@ -50,7 +50,6 @@ public class AddProductActivity extends AppCompatActivity  {
     private StorageReference ProductImagesRef,productFileRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
-    private FloatingActionButton logout;
     private static final int IMAGE_PICK_CODE =1000;
     private static final int PICKFILE_REQUEST_CODE =1001;
     private Uri imageUri,fileUri ;
@@ -67,21 +66,10 @@ public class AddProductActivity extends AppCompatActivity  {
         InputProductName = findViewById(R.id.add_product_name);
         InputProductCateogyr = findViewById(R.id.add_product_category);
         InputProductPrice = findViewById(R.id.add_product_price);
-        logout=findViewById(R.id.log_out_admin);
 
         loadingBar = new ProgressDialog(this);
 
         //handle button click
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                Toast.makeText(AddProductActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
