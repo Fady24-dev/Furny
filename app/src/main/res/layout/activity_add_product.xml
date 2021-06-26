@@ -104,15 +104,5 @@
         android:textSize="18sp"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/log_out_admin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="29dp"
-        android:src="@drawable/logout_icon"
-        android:backgroundTint="@color/standard"
-        android:layout_marginBottom="40dp" />
+
 </RelativeLayout>

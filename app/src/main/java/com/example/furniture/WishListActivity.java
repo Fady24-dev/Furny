@@ -23,8 +23,12 @@ import com.example.furniture.models.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class WishListActivity extends AppCompatActivity {
 
@@ -58,19 +62,38 @@ public class WishListActivity extends AppCompatActivity {
             Ref= FirebaseDatabase.getInstance().getReference().child("Favourite List").child("User List").child(userId).child("Products");
             recyclerView = findViewById(R.id.wish_list_recycler);
 
-            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-            );
 
-            // query in the database to fetch appropriate data
-            FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-                    .setQuery(Ref,Products.class)
-                    .build();
+            //CHECK IF EMPTY
+            Ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        emptyLayout.setVisibility(View.INVISIBLE);
+                        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+
+                        // query in the database to fetch appropriate data
+                        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                                .setQuery(Ref,Products.class)
+                                .build();
 
 
-            // Connecting object of required Adapter class to
-            wishListAdapter = new WishListAdapter(options);
-                recyclerView.setAdapter(wishListAdapter);
-                wishListAdapter.startListening();
+                        // Connecting object of required Adapter class to
+                        wishListAdapter = new WishListAdapter(options);
+                        recyclerView.setAdapter(wishListAdapter);
+                        wishListAdapter.startListening();
+                    }
+                    else{
+                        emptyLayout.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
 
         }
         //GUEST MODE

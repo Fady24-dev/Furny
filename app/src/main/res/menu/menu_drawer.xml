@@ -18,7 +18,6 @@
             app:showAsAction="always"/>
 
 
-
         <item
             android:id="@+id/wish_list_drawer"
             android:icon="@drawable/fav_icon"

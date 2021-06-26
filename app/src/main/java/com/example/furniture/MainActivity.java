@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 //                        // Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
 //                    }
                     if(email.equals("Admin0000@mail.com")){
-                        startActivity(new Intent(getApplicationContext(),AddProductActivity.class));
+                        startActivity(new Intent(getApplicationContext(),AdminViewActivity.class));
                         finish();
                         loadingbar.dismiss();
                         Toast.makeText(MainActivity.this, "Admin Mode", Toast.LENGTH_LONG).show();

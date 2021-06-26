@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +26,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,6 +45,7 @@ public class CartActivity extends AppCompatActivity {
     private TextView totalPrice,emptyTxt;
     private String prodID,elegantCounter;
     private int overTotalPrice,quantity;
+    private RelativeLayout emptyLayout;
 
     // private int overTotalPrice;
 
@@ -55,22 +60,46 @@ public class CartActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        emptyLayout=findViewById(R.id.empty_cart_layout);
+
         previewBtn=findViewById(R.id.preview_allcart_btn);
         totalPrice=findViewById(R.id.total_cart_price);
         emptyTxt=findViewById(R.id.empty_recycler_cart);
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+
         userID = user.getUid();
+
+
 
         //Firebase RecyclerView
         Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
+        Ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    emptyLayout.setVisibility(View.INVISIBLE);
+
+                }
+                else {
+                    emptyLayout.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         recyclerView = findViewById(R.id.recycler_cart);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         totalPrice.setText(String.valueOf(overTotalPrice));
         quantity=1;
+
 
 
         previewBtn.setOnClickListener(new View.OnClickListener() {
@@ -159,11 +188,11 @@ public class CartActivity extends AppCompatActivity {
                 holder.txt_poduct_id.setText(model.getPid());
 
                 // to count the total price in cart
-                    int oneProductPrice = Integer.parseInt(model.getPrice());
-                    //int oneProductQuantity = Integer.parseInt(holder.countButton.getNumber());
-                    int oneTyprProductTPrice = oneProductPrice*quantity;
-                    overTotalPrice = overTotalPrice + oneTyprProductTPrice;
-                    totalPrice.setText("$"+String.valueOf(overTotalPrice));
+                int oneProductPrice = Integer.parseInt(model.getPrice());
+                //int oneProductQuantity = Integer.parseInt(holder.countButton.getNumber());
+                int oneTyprProductTPrice = oneProductPrice*quantity;
+                overTotalPrice = overTotalPrice + oneTyprProductTPrice;
+                totalPrice.setText("$"+String.valueOf(overTotalPrice));
 
 
 
@@ -212,6 +241,8 @@ public class CartActivity extends AppCompatActivity {
         //Display RecyclerView
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+
+
     }
 
 

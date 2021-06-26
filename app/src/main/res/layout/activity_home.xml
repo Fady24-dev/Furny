@@ -12,7 +12,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="89dp"
+        android:layout_height="85dp"
         android:background="@color/standard"
         android:paddingTop="24dp"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -362,6 +362,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/hot_items_recyclerview"
                         android:layout_margin="5dp"
+                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         />

@@ -16,11 +16,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddProductActivity"></activity>
+<<<<<<< HEAD
+        <activity android:name=".AdminViewActivity"></activity>
+=======
+        <activity android:name=".PaymentActivity"></activity>
+>>>>>>> 8565c2142581f6f8683eedd5f4d83d3a58dbd317
+        <activity android:name=".AddProductActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".CategoryActivity"
-            android:theme="@style/CartTheme"
-            android:label="Category"/>
+        <activity
+            android:name=".CategoryActivity"
+            android:label="Category"
+            android:theme="@style/CartTheme" />
         <activity
             android:name=".WishListActivity"
             android:label="Wishlist"
@@ -52,19 +58,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

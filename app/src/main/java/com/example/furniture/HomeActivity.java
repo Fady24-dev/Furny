@@ -69,8 +69,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if(user != null){
             if(user.getEmail().equals("admin0000@mail.com")){
-                Toast.makeText(this, "Admin Mode", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(),AddProductActivity.class));
+                startActivity(new Intent(getApplicationContext(),AdminViewActivity.class));
                 finish();
             }
 
@@ -312,7 +311,6 @@ public class HomeActivity extends AppCompatActivity {
         // Connecting object of required Adapter class to
         hotProductAdapter = new HotProductAdapter(options);
         recyclerView.setAdapter(hotProductAdapter);
-
     }
 
 
