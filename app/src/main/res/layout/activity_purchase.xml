@@ -74,11 +74,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/calibri"
         android:text="$130"
-<<<<<<< HEAD
-        android:textColor="@color/callToAction"
-=======
         android:textColor="#ec5b3c"
->>>>>>> 8565c2142581f6f8683eedd5f4d83d3a58dbd317
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,11 +82,7 @@
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.591" />
-=======
         app:layout_constraintVertical_bias="0.606" />
->>>>>>> 8565c2142581f6f8683eedd5f4d83d3a58dbd317
 
     <TextView
         android:id="@+id/selected_item_category"
@@ -105,11 +97,7 @@
         app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.558" />
-=======
         app:layout_constraintVertical_bias="0.563" />
->>>>>>> 8565c2142581f6f8683eedd5f4d83d3a58dbd317
 
     <View
         android:id="@+id/view"
@@ -145,17 +133,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.917"
-        app:layout_constraintStart_toEndOf="@+id/selected_item_price"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.589"
-=======
         app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toEndOf="@+id/selected_item_price"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.604"
->>>>>>> 8565c2142581f6f8683eedd5f4d83d3a58dbd317
         app:srcCompat="@drawable/four_star" />
 
     <ImageButton
