@@ -69,12 +69,3 @@ dependencies {
 }
 
 
-sceneform.asset('sampledata/chair1.fbx',
-        'default',
-        'sampledata/chair1.sfa',
-        'src/main/res/raw/chair1')
-
-sceneform.asset('sampledata/sofa2.fbx',
-        'default',
-        'sampledata/sofa2.sfa',
-        'src/main/res/raw/sofa2')
