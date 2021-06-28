@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -134,6 +135,7 @@ public class Profile_Activity extends AppCompatActivity {
                     floatingActionButton.setImageResource(R.drawable.edit_pen_white);
                     fabState = "disabled";
                     submitData();
+
 
                 }
 

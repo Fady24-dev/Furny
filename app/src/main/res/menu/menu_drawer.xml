@@ -44,11 +44,7 @@
             android:title="Invite Friends"
             app:showAsAction="always"/>
 
-        <item
-            android:id="@+id/settings_drawer"
-            android:icon="@drawable/settings_icon"
-            android:title="Settings "
-            app:showAsAction="always"/>
+
 
         <item
             android:id="@+id/log_out_drawer"

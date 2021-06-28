@@ -76,7 +76,7 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Products,WishListAd
         View v;
         public wishListViewHolder(@NonNull View itemView) {
             super(itemView);
-            //pName=itemView.findViewById(R.id.wish_list__prodName);
+            pName=itemView.findViewById(R.id.wish_list__prodName);
             //pPrice=itemView.findViewById(R.id.wish_list__prodPrice);
             pImage = itemView.findViewById(R.id.wish_list_prodImage);
             v=itemView;
