@@ -4,42 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PurchaseActivity"
+    tools:context=".AdminProductViewActivity"
     android:background="#FFF">
-
-    <Button
-        android:id="@+id/selected_item_add_to_cart_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/round_bg"
-        android:fontFamily="@font/calibri"
-        android:text="Add To Cart"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        android:layout_marginHorizontal="16dp"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/selected_item_preview_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="View"
-        android:layout_marginHorizontal="16dp"
-        android:background="@drawable/round_border"
-        android:fontFamily="@font/calibri"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/selected_item_add_to_cart_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/selected_item_image"
@@ -53,8 +19,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/selected_item_name"
+        android:enabled="false"
+        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/calibri"
@@ -68,8 +36,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.562" />
 
-    <TextView
+    <EditText
         android:id="@+id/selected_item_price"
+        android:enabled="false"
+        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/calibri"
@@ -112,20 +82,21 @@
         app:layout_constraintTop_toTopOf="@+id/selected_item_image"
         app:layout_constraintVertical_bias="0.641" />
 
-    <TextView
+    <EditText
         android:id="@+id/selected_item_description"
+        android:enabled="false"
+        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="19dp"
         android:fontFamily="@font/calibri"
         android:padding="16dp"
-        android:text="Snuggle up, feel warmly embraced and enjoy cosy nights and lazy days. This sofa is extra deep, has soft and moveable back cushions, and comes in various sizes and shapes – everything for your comfort."
         android:textColor="@color/grey"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/selected_item_preview_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -139,19 +110,32 @@
         app:layout_constraintVertical_bias="0.585"
         app:srcCompat="@drawable/four_star" />
 
-    <ImageButton
-        android:id="@+id/fav_purchase_btn"
-        android:visibility="invisible"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/admin_delete_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="320dp"
-        android:background="@android:color/transparent"
-        android:padding="5dp"
-        android:src="@drawable/ic_favorite_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/selected_item_image"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        app:fabCustomSize="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_favorite_white_24dp" />
+        app:rippleColor="#ec5b3c"
+        app:srcCompat="@drawable/delete_icon" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/admin_edit_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        app:fabCustomSize="55dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:rippleColor="#ec5b3c"
+        app:layout_constraintBottom_toBottomOf="@+id/admin_delete_fab"
+        app:layout_constraintEnd_toStartOf="@+id/admin_delete_fab"
+        app:srcCompat="@drawable/edit_pen_white" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

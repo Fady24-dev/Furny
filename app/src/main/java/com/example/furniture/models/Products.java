@@ -1,18 +1,26 @@
 package com.example.furniture.models;
 
 public class Products {
-    private String name,price,category,image,pid,model,quantity;
+    private String name;
+    private String price;
+    private String category;
+    private String image;
+    private String pid;
+    private String model;
+    private String description;
+    private String quantity;
 
     public Products() {
     }
 
-    public Products(String name, String price, String category, String image, String pid,String model) {
+    public Products(String name, String price, String category, String image, String pid, String model, String description) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.image = image;
         this.pid = pid;
         this.model=model;
+        this.description = description;
     }
 
     public String getQuantity() {
@@ -23,9 +31,11 @@ public class Products {
         this.quantity = quantity;
     }
 
-    public String getModel() {
-        return model;
-    }
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
+
+    public String getModel() { return model; }
 
     public void setModel(String model) {
         this.model = model;
@@ -71,3 +81,5 @@ public class Products {
         this.pid = pid;
     }
 }
+
+

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.furniture.AdminProductViewActivity;
 import com.example.furniture.PurchaseActivity;
 import com.example.furniture.R;
 import com.example.furniture.interfaces.ItemClickListner;
@@ -41,9 +42,19 @@ public class SearchProductAdapter extends FirebaseRecyclerAdapter<Products,Searc
         holder.v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(v.getContext(),PurchaseActivity.class);
-                intent.putExtra("pid",getRef(position).getKey());
-                v.getContext().startActivity(intent);
+                String className = v.getContext().getClass().getSimpleName();
+
+                if (className.equals("HomeActivity")) {
+                    Intent intent= new Intent(v.getContext(),PurchaseActivity.class);
+                    intent.putExtra("pid",getRef(position).getKey());
+                    v.getContext().startActivity(intent);
+                }
+
+                else {
+                    Intent intent= new Intent(v.getContext(), AdminProductViewActivity.class);
+                    intent.putExtra("pid",getRef(position).getKey());
+                    v.getContext().startActivity(intent);
+                }
             }
         });
     }

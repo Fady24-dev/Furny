@@ -211,7 +211,7 @@ public class HomeActivity extends AppCompatActivity {
                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                    switch (item.getItemId()){
                        case R.id.my_account_drawer:
-                           startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
+                           startActivity(new Intent(getApplicationContext(),MainActivity.class));
                            break;
                        case R.id.share_drawer:
                            Intent intent = new Intent(Intent.ACTION_SEND);
