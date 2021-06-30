@@ -5,7 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WishListActivity"
-    android:background="#FFF">
+    >
+
+
+
+        <RelativeLayout
+            android:id="@+id/empty_layout"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <include
+                layout="@layout/empty_wishlist" />
+        </RelativeLayout>
+
+
 
 
 
@@ -13,5 +27,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wish_list_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:paddingEnd="15dp"
+        android:paddingStart="0dp"
+        android:paddingBottom="15dp"
+        android:clipToPadding="false"
+        />
 </RelativeLayout>

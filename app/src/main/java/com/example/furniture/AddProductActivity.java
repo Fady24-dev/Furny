@@ -2,17 +2,21 @@ package com.example.furniture;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;;
@@ -23,6 +27,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,28 +43,37 @@ import java.util.HashMap;
 public class AddProductActivity extends AppCompatActivity  {
 
     private  ImageView mImageView;
-    private String category,CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
+    private String category,CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,productRandomKey, downloadImageUrl,downloadFileUrl;
     private Button AddNewProductButton;
+    private ImageButton uploadFile;
     private ImageView InputProductImage;
     private EditText InputProductName, InputProductCateogyr, InputProductPrice;
     private static final int GalleryPick = 1;
-    private Uri filePath;
-    private String productRandomKey, downloadImageUrl,downloadFileUrl;
     private StorageReference ProductImagesRef,productFileRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
-    private Button uploadBtn;
-    private Button uploadFile;
     private static final int IMAGE_PICK_CODE =1000;
     private static final int PICKFILE_REQUEST_CODE =1001;
     private Uri imageUri,fileUri ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_add_product);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //VIEWS
         mImageView = findViewById(R.id.image_view);
         uploadFile = findViewById(R.id.choose_btn);
-        //VIEWS
+        AddNewProductButton = findViewById(R.id.choose_image_btn);
+        InputProductImage = findViewById(R.id.image_view);
+        InputProductName = findViewById(R.id.add_product_name);
+        InputProductCateogyr = findViewById(R.id.add_product_category);
+        InputProductPrice = findViewById(R.id.add_product_price);
+
+        loadingBar = new ProgressDialog(this);
+
         //handle button click
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +89,7 @@ public class AddProductActivity extends AppCompatActivity  {
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
 
-        AddNewProductButton = findViewById(R.id.choose_image_btn);
-        InputProductImage = findViewById(R.id.image_view);
-        InputProductName = findViewById(R.id.add_product_name);
-        InputProductCateogyr = findViewById(R.id.add_product_category);
-        InputProductPrice = findViewById(R.id.add_product_price);
-        loadingBar = new ProgressDialog(this);
+
 
         uploadFile.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -207,6 +217,7 @@ public class AddProductActivity extends AppCompatActivity  {
 
 
 
+        //Upload 3d Model
         final UploadTask uploadFileTask = filePath.putFile(fileUri);
         uploadFileTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -219,6 +230,7 @@ public class AddProductActivity extends AppCompatActivity  {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+
                 double progress = (100.0 * snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
                 loadingBar.setMessage(new StringBuilder("Uploading: ") .append(progress).append("%"));
             }
@@ -242,7 +254,7 @@ public class AddProductActivity extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
-                            loadingBar.dismiss();
+                            //loadingBar.dismiss();
                             downloadFileUrl = task.getResult().toString();
                             Toast.makeText(AddProductActivity.this, "got the Product File Url Successfully...", Toast.LENGTH_SHORT).show();
                             SaveProductInfoToDatabase();
@@ -252,7 +264,7 @@ public class AddProductActivity extends AppCompatActivity  {
             }
         });
 
-
+        //Upload Image
         final UploadTask uploadTask = fileImagePath.putFile(imageUri);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -260,13 +272,6 @@ public class AddProductActivity extends AppCompatActivity  {
                 String message = e.toString();
                 Toast.makeText(AddProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
-            }
-
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progress = (100.0 * snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
-                loadingBar.setMessage(new StringBuilder("Uploading: ") .append(progress).append("%"));
             }
 
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -288,7 +293,7 @@ public class AddProductActivity extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
-                            loadingBar.dismiss();
+                            //loadingBar.dismiss();
                             downloadImageUrl = task.getResult().toString();
                             Toast.makeText(AddProductActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
                             SaveProductInfoToDatabase();
@@ -318,18 +323,29 @@ public class AddProductActivity extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(AddProductActivity.this, HomeActivity.class);
-                            startActivity(intent);
+                            //  loadingBar.dismiss();
+//                            Intent intent = new Intent(AddProductActivity.this, HomeActivity.class);
+//                            startActivity(intent);
 
-                            loadingBar.dismiss();
                             Toast.makeText(AddProductActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         } else {
-                            loadingBar.dismiss();
+                          //  loadingBar.dismiss();
                             String message = task.getException().toString();
                             Toast.makeText(AddProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+        loadingBar.dismiss();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

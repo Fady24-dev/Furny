@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -19,26 +20,36 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.furniture.adapters.HotProductAdapter;
 import com.example.furniture.adapters.SearchProductAdapter;
 import com.example.furniture.models.Products;
+import com.example.furniture.models.Users;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText searchBar;
-    private String receivedSearchedWord;
+    private String receivedSearchedWord,userID;
     private RecyclerView recyclerView;
-    private DatabaseReference Ref;
+    private DatabaseReference Ref,userRef;
     private SearchProductAdapter searchProductAdapter;
+    private FirebaseUser user;
+
 
     private int numberOfColumns = 2;
 
@@ -50,11 +61,17 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_search);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
         searchBar=findViewById(R.id.search_bar_main);
         receivedSearchedWord=getIntent().getStringExtra("searchInput");
         searchBar.setText(receivedSearchedWord);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userRef=FirebaseDatabase.getInstance().getReference("Users");
+
+
 
 
         recyclerView=findViewById(R.id.search_items_recyclerview);
@@ -82,7 +99,8 @@ public class SearchActivity extends AppCompatActivity {
                         break;
                     case R.id.log_out_drawer:
                         FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        Toast.makeText(SearchActivity.this, "Logged Out Successfully.", Toast.LENGTH_SHORT).show();
                         finish();
                         break;
                 }
@@ -95,6 +113,59 @@ public class SearchActivity extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigtaion_drawer_open, R.string.navigtaion_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView userNameTextView = headerView.findViewById(R.id.user_name_profile_drawer);
+        TextView userEmailTextView = headerView.findViewById(R.id.email_user_drawer);
+        TextView signupGuest = headerView.findViewById(R.id.signin_signup_btn);
+        ImageView profileImageView = headerView.findViewById(R.id.header_profile_image_drawer);
+
+
+        //USER MODE
+        if(user != null){
+            userID =user.getUid();
+            profileImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
+                }
+            });
+            userRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Users user = snapshot.getValue(Users.class);
+                    if(user != null){
+                        String username= user.getName();
+                        String email= user.getEmail();
+                        String image = user.getImage();
+
+                        userEmailTextView.setVisibility(View.VISIBLE);
+                        signupGuest.setVisibility(View.INVISIBLE);
+                        userNameTextView.setText(username);
+                        userEmailTextView.setText(email);
+                        Picasso.with(getApplicationContext()).load(user.getImage()).into(profileImageView);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+
+        //Guest MODE
+        else {
+            userEmailTextView.setVisibility(View.INVISIBLE);
+            signupGuest.setVisibility(View.VISIBLE);
+            signupGuest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                }
+            });
+        }
 
 
 

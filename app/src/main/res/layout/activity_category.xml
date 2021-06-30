@@ -7,18 +7,7 @@
     android:orientation="vertical"
     tools:context=".CategoryActivity">
 
-    <EditText
-        android:id="@+id/myCateg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Categories"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="30sp"
-        android:textStyle="bold">
 
-    </EditText>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -43,10 +32,10 @@
                 app:contentPadding="12dp">
 
                 <LinearLayout
-                    android:clickable="true"
                     android:id="@+id/closetCatSelection"
-                    android:layout_width="106dp"
-                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_width="90dp"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -90,8 +79,8 @@
 
                 <LinearLayout
                     android:id="@+id/SofaCatSelection"
-                    android:layout_width="106dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -135,8 +124,8 @@
 
                 <LinearLayout
                     android:id="@+id/BedCatSelection"
-                    android:layout_width="106dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -180,8 +169,8 @@
 
                 <LinearLayout
                     android:id="@+id/OfficeCatSelection"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -226,8 +215,8 @@
                 <LinearLayout
                     android:clickable="true"
                     android:id="@+id/chairCatSelection"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -277,7 +266,7 @@
         android:fontFamily="@font/calibri"
         android:padding="8dp"
         android:text="Products"
-        android:textColor="#000000"
+        android:textColor="@color/standard"
         android:textSize="18sp"
         ></TextView>
     <FrameLayout

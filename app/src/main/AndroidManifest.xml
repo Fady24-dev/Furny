@@ -16,9 +16,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddProductActivity"></activity>
+        <activity android:name=".AdminProductViewActivity"></activity>
+        <activity android:name=".AdminModelViewActivity" />
+        <activity android:name=".AdminViewActivity" />
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".AddProductActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".CategoryActivity" />
+        <activity
+            android:name=".CategoryActivity"
+            android:label="Category"
+            android:theme="@style/CartTheme" />
         <activity
             android:name=".WishListActivity"
             android:label="Wishlist"
@@ -50,9 +57,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,6 +64,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

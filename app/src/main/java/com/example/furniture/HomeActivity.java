@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -19,7 +21,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -44,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
     private HotProductAdapter hotProductAdapter;
     private DatabaseReference Ref;
     private FirebaseUser user;
-    private String userID,searchInput;
+    private String userID,searchInput,menuSwitchID;
     private EditText searchBar;
     private LinearLayout chairCatLayout,bedLayout,sofaLayout,closetLayout,officeLayout;
 
@@ -54,6 +58,23 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_home);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Ref=FirebaseDatabase.getInstance().getReference("Users");
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar_home);
+        setSupportActionBar(toolbar);
+
+        if(user != null){
+            if(user.getEmail().equals("admin0000@mail.com")){
+                startActivity(new Intent(getApplicationContext(),AdminViewActivity.class));
+                finish();
+            }
+
+        }
+
         searchBar=findViewById(R.id.search_bar_home);
         chairCatLayout = findViewById(R.id.chair_Cat_Selection);
         bedLayout = findViewById(R.id.Bed_Cat_Selection);
@@ -112,12 +133,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        Ref=FirebaseDatabase.getInstance().getReference("Users");
-        userID=user.getUid();
 
-       Toolbar toolbar = findViewById(R.id.toolbar_home);
-       setSupportActionBar(toolbar);
 
        //Search bar Clicking enter
        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -139,48 +155,88 @@ public class HomeActivity extends AppCompatActivity {
            }
        });
 
+
         //Nav Drawer
+        //User MODE
         DrawerLayout drawer = findViewById(R.id.drawer_layout1);
         NavigationView navigationView = findViewById(R.id.nav_view1);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home_drawer:
-                        break;
-                    case R.id.my_account_drawer:
-                        startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
-                        break;
-                    case R.id.log_out_drawer:
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        finish();
-                        break;
-                    case R.id.cart_drawer:
-                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
-                        break;
-                    case R.id.wish_list_drawer:
-                        startActivity(new Intent(getApplicationContext(),WishListActivity.class));
-                        break;
-                    case R.id.orders_drawer:
-                        startActivity(new Intent(getApplicationContext(),AddProductActivity.class));
-                        break;
-                    case R.id.share_drawer:
-                        Intent intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("text/plain");
-                        String shareBody="New Release VR Shopping,TRY IT NOW:"+"\n https://web.facebook.com/Fady.RR24/";
-                        String shareSub="Furniture App,Share now!";
-                        intent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
-                        intent.putExtra(Intent.EXTRA_TEXT,shareBody);
-                        startActivity(Intent.createChooser(intent,"Share Using"));
+       if(user !=null){
+           navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+               @Override
+               public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                   switch (item.getItemId()){
+                       case R.id.home_drawer:
+                           break;
+                       case R.id.my_account_drawer:
+                           startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
+                           break;
+                       case R.id.log_out_drawer:
+                           FirebaseAuth.getInstance().signOut();
+                           startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                           Toast.makeText(HomeActivity.this, "Logged Out Successfully.", Toast.LENGTH_SHORT).show();
+                           finish();
+                           break;
+                       case R.id.cart_drawer:
+                           startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                           break;
+                       case R.id.wish_list_drawer:
+                           startActivity(new Intent(getApplicationContext(),WishListActivity.class));
+                           break;
+                       case R.id.orders_drawer:
+                           break;
+                       case R.id.share_drawer:
+                           Intent intent = new Intent(Intent.ACTION_SEND);
+                           intent.setType("text/plain");
+                           String shareBody="New Release VR Shopping,TRY IT NOW:"+"\n https://web.facebook.com/Fady.RR24/";
+                           String shareSub="Furniture App,Share now!";
+                           intent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+                           intent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                           startActivity(Intent.createChooser(intent,"Share Using"));
 
-                        break;
+                           break;
 
-                }
-                drawer.closeDrawer((GravityCompat.START));
-                return true;
-            }
-        });
+                   }
+                   drawer.closeDrawer((GravityCompat.START));
+                   return true;
+               }
+           });
+       }
+       //GUEST MODE
+       else{
+           // clear previous menu
+           navigationView.getMenu().clear();
+           navigationView.inflateMenu(R.menu.guest_menu);
+           navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+               @Override
+               public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                   switch (item.getItemId()){
+                       case R.id.my_account_drawer:
+                           startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                           break;
+                       case R.id.share_drawer:
+                           Intent intent = new Intent(Intent.ACTION_SEND);
+                           intent.setType("text/plain");
+                           String shareBody="New Release VR Shopping,TRY IT NOW:"+"\n https://web.facebook.com/Fady.RR24/";
+                           String shareSub="Furniture App,Share now!";
+                           intent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+                           intent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                           startActivity(Intent.createChooser(intent,"Share Using"));
+                           break;
+
+                       case R.id.wish_list_drawer:
+                           startActivity(new Intent(getApplicationContext(),WishListActivity.class));
+                           break;
+
+                   }
+                   drawer.closeDrawer((GravityCompat.START));
+                   return true;
+               }
+           });
+       }
+
+
+
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigtaion_drawer_open, R.string.navigtaion_drawer_close);
@@ -190,35 +246,55 @@ public class HomeActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_name_profile_drawer);
         TextView userEmailTextView = headerView.findViewById(R.id.email_user_drawer);
+        TextView signupGuest = headerView.findViewById(R.id.signin_signup_btn);
         ImageView profileImageView = headerView.findViewById(R.id.header_profile_image_drawer);
 
-        profileImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
-            }
-        });
 
-        Ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Users user = snapshot.getValue(Users.class);
-                if(user != null){
-                    String username= user.getName();
-                    String email= user.getEmail();
-                    String image = user.getImage();
 
-                    userNameTextView.setText(username);
-                    userEmailTextView.setText(email);
-                    Picasso.with(getApplicationContext()).load(user.getImage()).into(profileImageView);
+
+
+        if(user != null){
+            userID=user.getUid();
+            profileImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),Profile_Activity.class));
                 }
-            }
+            });
+            Ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Users user = snapshot.getValue(Users.class);
+                    if(user != null){
+                        String username= user.getName();
+                        String email= user.getEmail();
+                        String image = user.getImage();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                        userEmailTextView.setVisibility(View.VISIBLE);
+                        signupGuest.setVisibility(View.INVISIBLE);
+                        userNameTextView.setText(username);
+                        userEmailTextView.setText(email);
+                        Picasso.with(getApplicationContext()).load(user.getImage()).into(profileImageView);
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+        else {
+            userEmailTextView.setVisibility(View.INVISIBLE);
+            signupGuest.setVisibility(View.VISIBLE);
+            signupGuest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                }
+            });
+        }
 
 
         //Firebase RecyclerView
@@ -235,7 +311,6 @@ public class HomeActivity extends AppCompatActivity {
         // Connecting object of required Adapter class to
         hotProductAdapter = new HotProductAdapter(options);
         recyclerView.setAdapter(hotProductAdapter);
-
     }
 
 

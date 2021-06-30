@@ -18,7 +18,6 @@
             app:showAsAction="always"/>
 
 
-
         <item
             android:id="@+id/wish_list_drawer"
             android:icon="@drawable/fav_icon"
@@ -27,7 +26,7 @@
 
         <item
             android:id="@+id/orders_drawer"
-            android:icon="@drawable/fav_icon"
+            android:icon="@drawable/ic_assignment_black_24dp"
             android:title="My Orders"
             app:showAsAction="always"/>
 
@@ -45,11 +44,7 @@
             android:title="Invite Friends"
             app:showAsAction="always"/>
 
-        <item
-            android:id="@+id/settings_drawer"
-            android:icon="@drawable/settings_icon"
-            android:title="Settings "
-            app:showAsAction="always"/>
+
 
         <item
             android:id="@+id/log_out_drawer"

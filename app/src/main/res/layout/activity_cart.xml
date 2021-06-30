@@ -14,6 +14,15 @@
         android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
+    <RelativeLayout
+        android:id="@+id/empty_cart_layout"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <include
+            layout="@layout/empty_cart" />
+    </RelativeLayout>
     <TextView
         android:id="@+id/empty_recycler_cart"
         android:layout_width="wrap_content"
@@ -121,9 +130,10 @@
                     android:layout_height="40dp"
                     android:text="Payment"
                     android:textColor="#FFF"
-                    android:background="@drawable/circularbutton"
+                    android:background="@drawable/round_bg"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="25dp"
+                    android:layout_marginRight="15dp"
                     />
                 <Button
                     android:layout_below="@id/total_cart_price"
@@ -131,10 +141,11 @@
                     android:layout_width="130dp"
                     android:layout_height="40dp"
                     android:text="Preview"
-                    android:textColor="#FFF"
-                    android:background="@drawable/circularbutton"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/round_border"
                     android:layout_alignParentLeft="true"
                     android:layout_marginTop="25dp"
+                    android:layout_marginLeft="15dp"
                     />
 
             </RelativeLayout>

@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Profile_Activity">
 
-
-
     <RelativeLayout
         android:id="@+id/rellay1"
         android:layout_width="match_parent"
@@ -24,7 +22,7 @@
             app:civ_border_color="@color/white"
             app:civ_border_width="1dp"
             app:civ_shadow="true"
-            app:civ_shadow_radius="4dp"
+            app:civ_shadow_radius="5dp"
             app:civ_shadow_color="@color/grey"
             android:src="@drawable/my_account_icon"/>
 
@@ -36,7 +34,7 @@
             android:layout_below="@+id/user_image"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-light"
-            android:text="User Name"
+            android:text="Welcome"
             android:textColor="@color/white"
             android:textSize="32sp" />
 
@@ -49,10 +47,22 @@
             android:fontFamily="sans-serif"
             android:text="Cairo, Egypt"
             android:textAllCaps="true"
-            android:textColor="@color/address"
+            android:textColor="#ec5b3c"
             android:textSize="14sp" />
+        <!--
+        <TextView
+            android:id="@+id/signin_signup_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_user_name"
+            android:layout_centerHorizontal="true"
+            android:text="Log in/Sign Up"
+            android:textStyle="bold"
+            android:textColor="#ec5b3c"
+            android:textSize="14sp" /> -->
 
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -77,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/calibri"
                     android:text="Email"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -115,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Phone"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -153,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Address"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -191,7 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Facebook"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/standard"
                     android:textSize="15sp" />
 
                 <EditText
@@ -224,25 +234,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:gravity="end"
             android:orientation="horizontal"
             android:weightSum="2"
             android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="10dp">
 
-            <Button
-                android:visibility="invisible"
-                android:id="@+id/profile_submit_button"
-                android:layout_width="20dp"
-                android:layout_weight="1"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit" />
-
-            <Button
-                android:id="@+id/profile_edit_button"
-                android:layout_width="20dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
+                android:clickable="true"
+                android:src="@drawable/edit_pen_white"
+                app:fabCustomSize="65dp"
+                android:backgroundTint="@color/colorPrimary"
+                app:rippleColor="#ec5b3c"
+                android:layout_margin="16dp" />
 
         </LinearLayout>
 
