@@ -2,6 +2,7 @@ package com.example.furniture;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,13 +45,12 @@ import java.util.HashMap;
 
 public class AdminProductViewActivity extends AppCompatActivity {
     private ImageView prodImage;
-    private TextView prodName,prodPrice,prodCategory;
     private EditText itemName, itemPrice, itemDesc;
     private String prodId;
     private Context context;
     private DatabaseReference Ref;
     private StorageReference storageReference;
-    private String productImage,productPrice, editFabState;
+    private String editFabState;
     private FloatingActionButton adminEditFab, adminDeleteFab;
 
     @Override
@@ -61,15 +63,10 @@ public class AdminProductViewActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         context = this;
 
-        prodName = findViewById(R.id.selected_item_name);
-        prodPrice = findViewById(R.id.selected_item_price);
-        prodCategory = findViewById(R.id.selected_item_category);
-        prodImage = findViewById(R.id.selected_item_image);
-
         itemName = findViewById(R.id.selected_item_name);
         itemPrice = findViewById(R.id.selected_item_price);
         itemDesc = findViewById(R.id.selected_item_description);
-
+        prodImage = findViewById(R.id.selected_item_image);
 
         prodId = getIntent().getStringExtra("pid");
 

@@ -44,13 +44,13 @@ public class SearchProductAdapter extends FirebaseRecyclerAdapter<Products,Searc
             public void onClick(View v) {
                 String className = v.getContext().getClass().getSimpleName();
 
-                if (className.equals("HomeActivity")) {
+                if (className.equals("HomeActivity") || className.equals("SearchActivity")) {
                     Intent intent= new Intent(v.getContext(),PurchaseActivity.class);
                     intent.putExtra("pid",getRef(position).getKey());
                     v.getContext().startActivity(intent);
                 }
 
-                else {
+                else if (className.equals("AdminViewActivity")) {
                     Intent intent= new Intent(v.getContext(), AdminProductViewActivity.class);
                     intent.putExtra("pid",getRef(position).getKey());
                     v.getContext().startActivity(intent);

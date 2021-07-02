@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Furniture App</string>
+    <string name="app_name">Furny</string>
 
     <string name="navigtaion_drawer_open">Open navigation drawer</string>
     <string name="navigtaion_drawer_close">Close navigation drawer</string>
