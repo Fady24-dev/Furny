@@ -39,10 +39,9 @@ public class ArActivity extends AppCompatActivity {
     ProgressBar progressBar;
     RecyclerView recyclerView;
     private FirebaseUser user;
-    private String userID,prodID;
+    private String userID, prodID;
     Boolean isPurchase;
-    String prodId,activity;
-
+    String prodId, activity;
 
 
     @Override
@@ -50,32 +49,29 @@ public class ArActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        arFragment= (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
-        progressBar=findViewById(R.id.progress_bar);
+        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
+        progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.GONE);
 
 
-        prodId =getIntent().getStringExtra("pid");
+        prodId = getIntent().getStringExtra("pid");
 
         activity = getIntent().getStringExtra("activity");
-        if(activity==null){
-            activity="none";
+        if (activity == null) {
+            activity = "none";
         }
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
+        if (user != null) {
             userID = user.getUid();
             //Firebase RecyclerView
-            Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
+            Ref = FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
 
             recyclerView = findViewById(R.id.ar_recycler);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         }
-
-
-
 
 
 //
@@ -113,7 +109,6 @@ public class ArActivity extends AppCompatActivity {
         //String prodUri ="https://firebasestorage.googleapis.com/v0/b/furnitureapp-a03d7.appspot.com/o/3Dmodels%2Fchair1.sfb?alt=media&token=f2730282-4d94-4b3d-9df8-7c56f09de14b";
 
 
-
     }
 
     private void addModelToScene(Anchor anchor, ModelRenderable modelRenderable) {
@@ -130,20 +125,21 @@ public class ArActivity extends AppCompatActivity {
         transformableNode.select();
 
     }
+
     @Override
     protected void onStart() {
         super.onStart();
 
 
         //To Preview Single Item From Purchase activity
-        if(activity.equals("purchase")){
+        if (activity.equals("purchase")) {
 
-            Log.d("test","if success");
-            DatabaseReference purchRef=FirebaseDatabase.getInstance().getReference().child("Products");
+            Log.d("test", "if success");
+            DatabaseReference purchRef = FirebaseDatabase.getInstance().getReference().child("Products");
             purchRef.child(prodId).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
+                    if (snapshot.exists()) {
                         String productModel = snapshot.child("model").getValue().toString();
                         arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
                             Anchor anchor = hitResult.createAnchor();
@@ -152,7 +148,7 @@ public class ArActivity extends AppCompatActivity {
                             ModelRenderable.builder()
                                     .setSource(getApplicationContext(), Uri.parse(productModel))
                                     .build()
-                                    .thenAccept(modelRenderable -> addModelToScene(anchor,modelRenderable))
+                                    .thenAccept(modelRenderable -> addModelToScene(anchor, modelRenderable))
                                     .exceptionally(throwable -> {
                                         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                                         builder.setMessage(throwable.getMessage())
@@ -173,14 +169,14 @@ public class ArActivity extends AppCompatActivity {
 
         //To Preview Multiple Item From Cart activity
         else {
-            if(user != null){
+            if (user != null) {
                 FirebaseRecyclerOptions<Products> options =
                         new FirebaseRecyclerOptions.Builder<Products>()
-                                .setQuery(Ref,Products.class)
+                                .setQuery(Ref, Products.class)
                                 .build();
 
 
-                FirebaseRecyclerAdapter<Products, ArViewHolder> adapter= new FirebaseRecyclerAdapter<Products, ArViewHolder>(options) {
+                FirebaseRecyclerAdapter<Products, ArViewHolder> adapter = new FirebaseRecyclerAdapter<Products, ArViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull ArViewHolder holder, int position, @NonNull Products model) {
                         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -191,14 +187,14 @@ public class ArActivity extends AppCompatActivity {
                         holder.prodImage.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                prodID =getRef(holder.getAdapterPosition()).getKey();
-                                Ref= FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
+                                prodID = getRef(holder.getAdapterPosition()).getKey();
+                                Ref = FirebaseDatabase.getInstance().getReference().child("Cart List").child("User Cart").child(userID).child("Products");
 
                                 Ref.child(prodID).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                        if(snapshot.exists()){
+                                        if (snapshot.exists()) {
                                             String productModel = snapshot.child("model").getValue().toString();
                                             arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
                                                 Anchor anchor = hitResult.createAnchor();
@@ -207,7 +203,7 @@ public class ArActivity extends AppCompatActivity {
                                                 ModelRenderable.builder()
                                                         .setSource(getApplicationContext(), Uri.parse(productModel))
                                                         .build()
-                                                        .thenAccept(modelRenderable -> addModelToScene(anchor,modelRenderable))
+                                                        .thenAccept(modelRenderable -> addModelToScene(anchor, modelRenderable))
                                                         .exceptionally(throwable -> {
                                                             AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                                                             builder.setMessage(throwable.getMessage())
@@ -232,7 +228,7 @@ public class ArActivity extends AppCompatActivity {
                     @NonNull
                     @Override
                     public ArViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ar_item,parent,false);
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ar_item, parent, false);
                         ArViewHolder holder = new ArViewHolder(view);
                         return holder;
                     }

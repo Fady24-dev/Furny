@@ -47,6 +47,10 @@ dependencies {
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
     //GoogleSceneForm
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
+    implementation 'com.google.ar:core:1.33.0'
+
+
+
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
     implementation 'com.google.firebase:firebase-core:18.0.3'

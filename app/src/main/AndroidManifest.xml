@@ -6,8 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
-        android:name="android.hardware.camera.ar"
-        android:required="true" />
+        android:name="android.hardware.camera.ar" />
 
     <application
         android:allowBackup="true"
