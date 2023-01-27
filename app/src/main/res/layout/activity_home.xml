@@ -130,7 +130,7 @@
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
-                                    android:src="@drawable/closet" />
+                                    android:src="@drawable/newcloset" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -173,7 +173,7 @@
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
-                                    android:src="@drawable/sofa" />
+                                    android:src="@drawable/newsofa" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -218,7 +218,7 @@
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
-                                    android:src="@drawable/bed" />
+                                    android:src="@drawable/newbed" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -263,7 +263,7 @@
                                 <ImageView
                                     android:layout_width="46dp"
                                     android:layout_height="37dp"
-                                    android:src="@drawable/office" />
+                                    android:src="@drawable/newdesk" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -310,7 +310,7 @@
                                     android:clickable="false"
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
-                                    android:src="@drawable/chair_white_bg" />
+                                    android:src="@drawable/newarmchair" />
 
                                 <RelativeLayout
                                     android:clickable="false"
