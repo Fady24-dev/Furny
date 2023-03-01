@@ -24,4 +24,4 @@ download apk app : https://www.mediafire.com/file/jtoijasxcdy90h6/Furny.apk/file
 
 -Picasso :  Catch images and load them in imageView.
 
--Navigaion Drawer
+-Navigation Drawer
