@@ -13,6 +13,12 @@ download apk app : https://www.mediafire.com/file/jtoijasxcdy90h6/Furny.apk/file
 ![navDrawer](https://user-images.githubusercontent.com/73345730/222240381-491b8738-16df-42db-9481-9fb10928179c.png)
 
 # Libraries and technologies used
+
 -Firebase ( authentication and real time database )
 
 -Google SceneForm (AR core )
+
+-Material design
+
+-ButterKnife
+
